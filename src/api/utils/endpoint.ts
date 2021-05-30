@@ -1,5 +1,5 @@
+import { PlatformName } from "../../types/endpoints";
 import { RIOT_API_URL } from "../../constants/constants";
-import { RoutingName } from "../../types/endpoints";
 
-export const getRiotAPIBaseURL = (routing: RoutingName) =>
-    `https://${routing}.${RIOT_API_URL}`;
+export const getRiotAPIBaseURL = (platform: PlatformName) =>
+    `https://${platform}.${RIOT_API_URL}`;

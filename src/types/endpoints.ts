@@ -1,18 +1,24 @@
 export type Endpoint = string;
 
-export type PlatformName = "americas" | "asia" | "europe";
+export type ClusterName = "americas" | "asia" | "europe";
 
 export type RegionName =
-    | "br1"
-    | "eun1"
     | "euw1"
-    | "jp1"
-    | "kr"
+    | "eun1"
+    | "na1"
     | "la1"
     | "la2"
-    | "na1"
+    | "kr"
+    | "jp1"
+    | "br1"
     | "oc1"
+    | "ru"
     | "tr1"
-    | "ru";
+    | "sea"
+    | "ap"
+    | "br"
+    | "eu"
+    | "na"
+    | "latam";
 
-export type RoutingName = RegionName | PlatformName;
+export type PlatformName = ClusterName | RegionName;

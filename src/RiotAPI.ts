@@ -1,26 +1,25 @@
 import { IRiotAPI, RiotAPIConfig } from "./types/riotapi";
+import { InvalidRiotApiConfig, NoCredentialsError } from "./errors";
 import { MemoryCache, RedisCache } from "./cache";
-import { InvalidRiotApiConfig } from "./errors";
+import { RequestOptions, RestEndpoint } from "./types/api";
+import { PlatformName } from "./types/endpoints";
 import { RIOT_TOKEN_HEADER } from "./api";
 import Redis from "ioredis";
-import { RestEndpoint } from "./types/api";
-import { RoutingName } from "./types/endpoints";
 import { Summoner } from "./types/summoner";
 import { compile } from "path-to-regexp";
 import fetch from "node-fetch";
 import { getRiotAPIBaseURL } from "./api/utils/endpoint";
+import { getSummonerDTO } from "./dto/summoner";
 import { logger } from "./logger";
 
 class RiotAPI implements IRiotAPI {
     private readonly apiConfig: RiotAPIConfig;
 
-    readonly cache?: MemoryCache | RedisCache;
-
-    // @ts-ignore
-    private mySummoner: Summoner.Summoner;
+    private readonly cache?: MemoryCache | RedisCache;
 
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
+        if (!config.riotToken) throw new NoCredentialsError();
         this.apiConfig = config;
         this.apiConfig.cache = config.cache || {
             cacheType: "local",
@@ -36,24 +35,17 @@ class RiotAPI implements IRiotAPI {
         }
     }
 
-    async setAccount({
-        username,
-        puuid,
-        accountId,
-    }: {
-        username?: Summoner.Name;
-        puuid?: Summoner.PUUID;
-        accountId?: Summoner.AccountID;
-    }) {
-        if (accountId) {
-            this.mySummoner = await this.summoner.byAccountID(accountId);
-        } else if (puuid) {
-            this.mySummoner = await this.summoner.byPUUID(puuid);
-        } else if (username) {
-            this.mySummoner = await this.summoner.byName(username);
-        }
-        return this;
+    get config(): RiotAPIConfig {
+        return this.apiConfig;
     }
+
+    // DTOs accessors
+
+    get summoner(): Summoner.DTO {
+        return getSummonerDTO(this);
+    }
+
+    // UTILS
 
     private async checkCache<T>(key: string, url: string): Promise<T | null> {
         if (this.cache && this.apiConfig.cache.expiration) {
@@ -75,62 +67,30 @@ class RiotAPI implements IRiotAPI {
         }
     }
 
-    get me(): Summoner.Summoner {
-        return this.mySummoner;
-    }
-
-    get summoner(): Summoner.DTO {
-        return {
-            byAccountID: (accountID) =>
-                this.request(
-                    this.apiConfig.routingName,
-                    Summoner.RestEndpoint.byAccountID,
-                    { accountID }
-                ),
-            byName: (name) =>
-                this.request(
-                    this.apiConfig.routingName,
-                    Summoner.RestEndpoint.byName,
-                    { name }
-                ),
-            byPUUID: (puuid) =>
-                this.request(
-                    this.apiConfig.routingName,
-                    Summoner.RestEndpoint.byPUUID,
-                    { puuid }
-                ),
-            byID: (id) =>
-                this.request(
-                    this.apiConfig.routingName,
-                    Summoner.RestEndpoint.byPUUID,
-                    { id }
-                ),
-        };
-    }
-
-    get config(): RiotAPIConfig {
-        return this.apiConfig;
-    }
-
     async request<T>(
-        routingName: RoutingName,
+        platform: PlatformName,
         restEndpoint: RestEndpoint,
-        restEndpointData?: { [key: string]: string | number }
+        restEndpointData?: { [key: string]: string | number },
+        options?: RequestOptions
     ): Promise<T> {
         const createPath = compile(restEndpoint.endpoint, {
             encode: encodeURIComponent,
         });
 
-        const url = `${getRiotAPIBaseURL(
-            this.apiConfig.routingName
-        )}${createPath(restEndpointData)}`;
+        const url = `${getRiotAPIBaseURL(platform)}${createPath(
+            restEndpointData
+        )}`;
 
         const cacheValue = await this.checkCache<T>(restEndpoint.method, url);
         if (cacheValue) return cacheValue as T;
 
         const res = await fetch(url, {
             method: restEndpoint.method,
-            headers: { [RIOT_TOKEN_HEADER]: this.apiConfig.riotToken },
+            body: options?.body ? JSON.stringify(options.body) : undefined,
+            headers: {
+                ...options?.headers,
+                [RIOT_TOKEN_HEADER]: this.apiConfig.riotToken,
+            },
         });
         const resData = res.json();
         await this.setCache(restEndpoint.method, url, resData);

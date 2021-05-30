@@ -1,4 +1,6 @@
+import { AccessToken } from "./api";
 import { DTOEndpoint } from "./dto";
+import { RegionName } from "./endpoints";
 
 export namespace Summoner {
     export type ID = string;
@@ -20,28 +22,36 @@ export namespace Summoner {
     };
 
     export const RestEndpoint: DTOEndpoint<DTO> = {
-        byAccountID: {
+        getByAccountID: {
             method: "GET",
             endpoint: "/lol/summoner/v4/summoners/by-account/:accountID",
         },
-        byName: {
+        getByName: {
             method: "GET",
             endpoint: "/lol/summoner/v4/summoners/by-name/:name",
         },
-        byPUUID: {
+        getByPUUID: {
             method: "GET",
             endpoint: "/lol/summoner/v4/summoners/by-puuid/:puuid",
         },
-        byID: {
+        getByID: {
             method: "GET",
             endpoint: "/lol/summoner/v4/summoners/:id",
+        },
+        getMe: {
+            method: "GET",
+            endpoint: "/riot/account/v1/accounts/me",
         },
     };
 
     export type DTO = {
-        byAccountID(accountID: AccountID): Promise<Summoner>;
-        byName(name: Name): Promise<Summoner>;
-        byPUUID(puuid: PUUID): Promise<Summoner>;
-        byID(id: ID): Promise<Summoner>;
+        getByAccountID(
+            region: RegionName,
+            accountID: AccountID
+        ): Promise<Summoner>;
+        getByName(region: RegionName, name: Name): Promise<Summoner>;
+        getByPUUID(region: RegionName, puuid: PUUID): Promise<Summoner>;
+        getByID(region: RegionName, id: ID): Promise<Summoner>;
+        getMe(region: RegionName, accessToken: AccessToken): Promise<Summoner>;
     };
 }

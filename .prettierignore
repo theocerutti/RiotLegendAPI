@@ -4,6 +4,7 @@
 .github
 dist
 *.log
+.jest
 
 # code editor
 .idea

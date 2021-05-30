@@ -1,10 +1,17 @@
 import { RestEndpoint, RiotToken } from "./api";
+import { PlatformName } from "./endpoints";
 import Redis from "ioredis";
-import { RoutingName } from "./endpoints";
 import { Summoner } from "./summoner";
 
 export interface IRiotAPI {
+    request<T>(
+        platform: PlatformName,
+        restEndpoint: RestEndpoint,
+        restEndpointData?: { [key: string]: string | number }
+    ): Promise<T>;
     readonly config: RiotAPIConfig;
+
+    // DTOs accessors
     readonly summoner: Summoner.DTO;
     /* readonly account: Account.DTO;
         champion(): ChampionDTO;
@@ -18,15 +25,9 @@ export interface IRiotAPI {
         match(): TFTMatchDTO;
         summoner(): TFTSummonerDTO;
     }; */
-    request<T>(
-        routingName: RoutingName,
-        restEndpoint: RestEndpoint,
-        restEndpointData?: { [key: string]: string | number }
-    ): Promise<T>;
 }
 
 export type RiotAPIConfig = {
-    routingName: RoutingName;
     riotToken: RiotToken;
     cache?: {
         cacheType: "local" | "ioredis";
