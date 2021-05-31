@@ -1,4 +1,4 @@
-import { DTOEndpoint } from "./dto";
+import { DTOEndpoint } from "../dto";
 import { Summoner } from "./summoner";
 
 export namespace Account {

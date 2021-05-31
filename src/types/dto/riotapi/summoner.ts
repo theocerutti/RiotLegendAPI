@@ -1,6 +1,6 @@
-import { AccessToken } from "./api";
-import { DTOEndpoint } from "./dto";
-import { RegionName } from "./endpoints";
+import { AccessToken } from "../../api";
+import { DTOEndpoint } from "../dto";
+import { RegionName } from "../../endpoints";
 
 export namespace Summoner {
     export type ID = string;
