@@ -21,4 +21,9 @@ export type RegionName =
     | "na"
     | "latam";
 
+export type RegionFallback = {
+    region: RegionName;
+    cluster: ClusterName;
+};
+
 export type PlatformName = ClusterName | RegionName;

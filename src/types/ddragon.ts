@@ -1,5 +1,4 @@
-export type GameVersion = string;
-export type GameVersions = Array<GameVersion>;
+import { CacheConfig } from "./cachedapi";
 
 export type Realm =
     | "na"
@@ -43,3 +42,13 @@ export type Locale =
     | "zh_MY" // Chinese (Malaysia)
     | "zh_CN" // Chinese (China)
     | "zh_TW"; // Chinese (Taiwan)
+
+export type ConfigDDragonAPI = {
+    cache?: CacheConfig;
+    region?: RegionFallback;
+};
+
+export type RegionFallback = {
+    realm: Realm;
+    locale: Locale;
+};

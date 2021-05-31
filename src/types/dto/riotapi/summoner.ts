@@ -46,12 +46,12 @@ export namespace Summoner {
 
     export type DTO = {
         getByAccountID(
-            region: RegionName,
-            accountID: AccountID
+            accountID: AccountID,
+            region?: RegionName
         ): Promise<Summoner>;
-        getByName(region: RegionName, name: Name): Promise<Summoner>;
-        getByPUUID(region: RegionName, puuid: PUUID): Promise<Summoner>;
-        getByID(region: RegionName, id: ID): Promise<Summoner>;
-        getMe(region: RegionName, accessToken: AccessToken): Promise<Summoner>;
+        getByName(name: Name, region?: RegionName): Promise<Summoner>;
+        getByPUUID(puuid: PUUID, region?: RegionName): Promise<Summoner>;
+        getByID(id: ID, region?: RegionName): Promise<Summoner>;
+        getMe(accessToken: AccessToken, region?: RegionName): Promise<Summoner>;
     };
 }

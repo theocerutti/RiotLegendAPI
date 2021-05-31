@@ -1,8 +1,13 @@
 import DDragonAPI from "../../api/DDragonAPI";
-import { GameVersions } from "../../types/ddragon";
 import { Versions } from "../../types/dto/ddragon/versions";
 
 export const getVersionsDTO = (api: DDragonAPI): Versions.DTO => ({
-    getAllGameVersions: (): Promise<GameVersions> =>
-        api.ddragonRequest(Versions.RestEndpoint.getAllGameVersions),
+    latest: async (): Promise<Versions.GameVersion> => {
+        const versions: Versions.GameVersions = await api.ddragonRequest(
+            Versions.RestEndpoint.all
+        );
+        return versions[0];
+    },
+    all: (): Promise<Versions.GameVersions> =>
+        api.ddragonRequest(Versions.RestEndpoint.all),
 });

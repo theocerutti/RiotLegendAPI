@@ -1,15 +1,21 @@
 import { DTOEndpoint } from "../dto";
-import { GameVersions } from "../../ddragon";
 
 export namespace Versions {
+    export type GameVersion = string;
+    export type GameVersions = Array<GameVersion>;
     export const RestEndpoint: DTOEndpoint<DTO> = {
-        getAllGameVersions: {
+        latest: {
+            method: "GET",
+            endpoint: "/api/versions.json",
+        },
+        all: {
             method: "GET",
             endpoint: "/api/versions.json",
         },
     };
 
     export type DTO = {
-        getAllGameVersions(): Promise<GameVersions>;
+        latest(): Promise<GameVersion>;
+        all(): Promise<GameVersions>;
     };
 }

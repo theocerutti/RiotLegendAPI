@@ -1,8 +1,13 @@
 import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
+import {
+    ClusterName,
+    PlatformName,
+    RegionFallback,
+    RegionName,
+} from "../types/endpoints";
 import { RequestOptions, RestEndpoint } from "../types/api";
 import CachedAPI from "./CachedAPI";
 import DDragonAPI from "./DDragonAPI";
-import { PlatformName } from "../types/endpoints";
 import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
 import { Summoner } from "../types/dto/riotapi/summoner";
@@ -10,29 +15,55 @@ import { compile } from "path-to-regexp";
 import { getRiotAPIBaseURL } from "./utils/endpoint";
 import { getSummonerDTO } from "../dto/riotapi/summoner";
 
+export const DEFAULT_REGION_FALLBACK: RegionName = "euw1";
+export const DEFAULT_CLUSTER_FALLBACK: ClusterName = "europe";
+
 class RiotAPI extends CachedAPI {
     private readonly dDragonApi: DDragonAPI;
 
-    private readonly config: RiotAPIConfig;
+    private readonly apiConfig: RiotAPIConfig;
+
+    private defaultRegionFallback: RegionFallback;
 
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
         super(config.cache);
-        this.config = config;
-        this.dDragonApi = new DDragonAPI(config.cache);
+        this.defaultRegionFallback = {
+            region: DEFAULT_REGION_FALLBACK,
+            cluster: DEFAULT_CLUSTER_FALLBACK,
+        };
+        this.apiConfig = config;
+        this.dDragonApi = new DDragonAPI({ cache: config.cache });
     }
 
     get dDragon(): DDragonAPI {
         return this.dDragonApi;
     }
 
-    get getConfig(): RiotAPIConfig {
-        return this.config;
+    get config(): RiotAPIConfig {
+        return this.apiConfig;
+    }
+
+    get regionFallback(): RegionFallback {
+        const fullFallback = this.defaultRegionFallback;
+        Object.keys({
+            ...this.defaultRegionFallback,
+            ...this.apiConfig?.platform,
+        }).map((key) => {
+            fullFallback[key] =
+                this.apiConfig?.platform?.[key] ||
+                this.defaultRegionFallback[key];
+            return null;
+        });
+        return fullFallback;
+    }
+
+    set regionFallback(fallback: RegionFallback) {
+        this.defaultRegionFallback = fallback;
     }
 
     // DTOs accessors
-
     get summoner(): Summoner.DTO {
         return getSummonerDTO(this);
     }
@@ -56,7 +87,7 @@ class RiotAPI extends CachedAPI {
             body: options?.body,
             headers: {
                 ...options?.headers,
-                [RIOT_TOKEN_HEADER]: this.config.riotToken,
+                [RIOT_TOKEN_HEADER]: this.apiConfig?.riotToken,
             },
         });
     }
