@@ -1,3 +1,4 @@
+import ChampionClass from "./champion";
 import { DTOEndpoint } from "../dto";
 import { Locale } from "../../ddragon";
 import { Versions } from "./versions";
@@ -48,7 +49,7 @@ export namespace Champions {
 
     export type Skin = {
         id: string;
-        num: string;
+        num: number;
         name: string;
         chromas: boolean;
     };
@@ -123,11 +124,11 @@ export namespace Champions {
         all(
             version?: Versions.GameVersion,
             locale?: Locale
-        ): Promise<ChampionsResponse>;
+        ): Promise<ChampionClass>;
         getByChampionName(
             championName: string,
             version?: Versions.GameVersion,
             locale?: Locale
-        ): Promise<Champion>;
+        ): Promise<ChampionClass>;
     };
 }
