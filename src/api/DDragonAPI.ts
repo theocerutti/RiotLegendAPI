@@ -1,16 +1,18 @@
-import { compile } from "path-to-regexp";
-import { getChampionsDTO } from "../dto/ddragon/champions";
 import {
     ConfigDDragonAPI,
     Locale,
     Realm,
     RegionFallback,
 } from "../types/ddragon";
-import { Champions } from "../types/dto/ddragon/champions";
 import CachedAPI from "./CachedAPI";
+import { ChampionsTypes } from "../types/dto/ddragon/champions";
 import { DDRAGON_API_URL } from "../constants/constants";
 import { RestEndpoint } from "../types/api";
-import { Versions } from "../types/dto/ddragon/versions";
+import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
+import { VersionsTypes } from "../types/dto/ddragon/versions";
+import { compile } from "path-to-regexp";
+import { getChampionsDTO } from "../dto/ddragon/champions";
+import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
 import { getVersionsDTO } from "../dto/ddragon/versions";
 
 export const DEFAULT_REALM_FALLBACK: Realm = "euw";
@@ -30,7 +32,7 @@ class DDragonAPI extends CachedAPI {
         };
     }
 
-    get versions(): Versions.DTO {
+    get versions(): VersionsTypes.DTO {
         return getVersionsDTO(this);
     }
 
@@ -38,8 +40,12 @@ class DDragonAPI extends CachedAPI {
         return this.apiConfig;
     }
 
-    get champions(): Champions.DTO {
+    get champions(): ChampionsTypes.DTO {
         return getChampionsDTO(this);
+    }
+
+    get summonerSpells(): SummonerSpellsTypes.DTO {
+        return getSummonerSpellsDTO(this);
     }
 
     get regionFallback(): RegionFallback {

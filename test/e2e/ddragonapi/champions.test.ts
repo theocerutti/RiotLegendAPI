@@ -1,4 +1,4 @@
-import Champion from "../../../src/types/dto/ddragon/champion";
+import Champion from "../../../src/dto/ddragon/class/champion";
 import DDragonAPI from "../../../src/api/DDragonAPI";
 import { isURL } from "../../utils";
 
@@ -7,12 +7,13 @@ describe("DDragonAPI", () => {
         test("get all champions", async () => {
             const api = new DDragonAPI();
             const champions = await api.champions.all();
-            expect(champions).toBeInstanceOf(Champion);
-            expect(Object.keys(champions.rawData)).toEqual([
+            expect(champions).toBeInstanceOf(Array);
+            const firstChampion = champions[0];
+            expect(firstChampion).toBeInstanceOf(Champion);
+            expect(Object.keys(firstChampion.metadata)).toEqual([
                 "type",
                 "format",
                 "version",
-                "data",
             ]);
         });
 
@@ -20,11 +21,10 @@ describe("DDragonAPI", () => {
             const api = new DDragonAPI();
             const champions = await api.champions.getByChampionName("Zyra");
             expect(champions).toBeInstanceOf(Champion);
-            expect(Object.keys(champions.rawData)).toEqual([
+            expect(Object.keys(champions.metadata)).toEqual([
                 "type",
                 "format",
                 "version",
-                "data",
             ]);
         });
 
@@ -41,10 +41,10 @@ describe("DDragonAPI", () => {
             champion
                 .getAllSplashAssetUrl()
                 .map((splashUrl) => expect(isURL(splashUrl)).toBeTruthy());
-            expect(isURL(champion.getSplashAssetUrl())).toBeTruthy();
             expect(isURL(champion.getSquareAssetUrl())).toBeTruthy();
             expect(isURL(champion.getLoadingAssetUrl())).toBeTruthy();
             expect(isURL(champion.getSplashAssetUrl())).toBeTruthy();
+            expect(isURL(champion.getSpriteSheetUrl())).toBeTruthy();
             expect(isURL(champion.getPassiveAssetUrl())).toBeTruthy();
             expect(isURL(champion.getQSpellAssetUrl())).toBeTruthy();
             expect(isURL(champion.getWSpellAssetUrl())).toBeTruthy();

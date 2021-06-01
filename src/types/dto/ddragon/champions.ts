@@ -1,25 +1,19 @@
-import ChampionClass from "./champion";
+import ChampionClass from "../../../dto/ddragon/class/champion";
 import { DTOEndpoint } from "../dto";
+import { Image } from "./image";
 import { Locale } from "../../ddragon";
-import { Versions } from "./versions";
+import { VersionsTypes } from "./versions";
 
-export namespace Champions {
-    export type ChampionsResponse = {
+export namespace ChampionsTypes {
+    export type ResponseHeader = {
         type: string;
         format: string;
-        version: Versions.GameVersion;
-        data: { [key: string]: Champion };
+        version: VersionsTypes.GameVersion;
     };
 
-    export type Image = {
-        full: string;
-        sprite: string;
-        group: string;
-        x: number;
-        y: number;
-        w: number;
-        h: number;
-    };
+    export type Response = {
+        data: { [key: string]: Champion };
+    } & ResponseHeader;
 
     export type Spell = {
         id: string;
@@ -122,12 +116,12 @@ export namespace Champions {
 
     export type DTO = {
         all(
-            version?: Versions.GameVersion,
+            version?: VersionsTypes.GameVersion,
             locale?: Locale
-        ): Promise<ChampionClass>;
+        ): Promise<Array<ChampionClass>>;
         getByChampionName(
             championName: string,
-            version?: Versions.GameVersion,
+            version?: VersionsTypes.GameVersion,
             locale?: Locale
         ): Promise<ChampionClass>;
     };

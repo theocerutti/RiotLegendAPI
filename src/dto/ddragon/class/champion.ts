@@ -1,19 +1,24 @@
-import { Champions } from "./champions";
+import { ChampionsTypes } from "../../../types/dto/ddragon/champions";
 import { DDRAGON_API_URL } from "../../../constants/constants";
-import ChampionsResponse = Champions.ChampionsResponse;
 
+// TODO: interpreting spell texts + add layer to get datas with ease
 class Champion {
-    readonly rawDataChampion: ChampionsResponse;
+    readonly metadataChampion: ChampionsTypes.ResponseHeader;
 
-    readonly dataChampion: Champions.Champion;
+    readonly dataChampion: ChampionsTypes.Champion;
 
-    constructor(championResponse: ChampionsResponse) {
-        this.rawDataChampion = championResponse;
-        this.dataChampion =
-            championResponse.data[Object.keys(championResponse.data)[0]];
+    constructor(
+        championRes: ChampionsTypes.Champion,
+        championResHeader: ChampionsTypes.ResponseHeader
+    ) {
+        this.metadataChampion = championResHeader;
+        this.dataChampion = championRes;
     }
 
-    private getAssetUrl(skinNumber: number, type: "splash" | "loading") {
+    private getAssetUrl(
+        skinNumber: number,
+        type: "splash" | "loading"
+    ): string {
         if (skinNumber < 0 || skinNumber > this.dataChampion.skins.length)
             throw new Error(
                 `${
@@ -44,7 +49,7 @@ class Champion {
     }
 
     getSquareAssetUrl(): string {
-        return `${DDRAGON_API_URL}/cdn/${this.rawDataChampion.version}/img/champion/${this.dataChampion.image.full}.png`;
+        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/champion/${this.dataChampion.image.full}.png`;
     }
 
     getPassiveAssetUrl(): string {
@@ -58,7 +63,7 @@ class Champion {
 
         if (spellIndex < 0 || spellIndex > this.dataChampion.spells.length)
             throw new Error(`Can't find Ability Asset with ID: ${id}`);
-        return `${DDRAGON_API_URL}/cdn/${this.rawDataChampion.version}/img/spell/${this.dataChampion.spells[spellIndex].image.full}`;
+        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/spell/${this.dataChampion.spells[spellIndex].image.full}`;
     }
 
     getAllAbilityAssetUrl(): Array<string> {
@@ -83,11 +88,15 @@ class Champion {
         return this.getAbilityAssetUrl(this.dataChampion.spells[3].id);
     }
 
-    get rawData() {
-        return this.rawDataChampion;
+    getSpriteSheetUrl(): string {
+        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/sprite/${this.dataChampion.image.sprite}`;
     }
 
-    get data() {
+    get metadata(): ChampionsTypes.ResponseHeader {
+        return this.metadataChampion;
+    }
+
+    get data(): ChampionsTypes.Champion {
         return this.dataChampion;
     }
 }

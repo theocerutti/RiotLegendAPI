@@ -1,10 +1,10 @@
-import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import {
     ClusterName,
     PlatformName,
     RegionFallback,
     RegionName,
 } from "../types/endpoints";
+import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
 import CachedAPI from "./CachedAPI";
 import DDragonAPI from "./DDragonAPI";

@@ -1,31 +1,46 @@
-import Champion from "../../types/dto/ddragon/champion";
-import { Champions } from "../../types/dto/ddragon/champions";
+import Champion from "./class/champion";
+import { ChampionsTypes } from "../../types/dto/ddragon/champions";
 import DDragonAPI from "../../api/DDragonAPI";
 
-export const getChampionsDTO = (api: DDragonAPI): Champions.DTO => ({
-    all: async (version?, locale?): Promise<Champion> => {
-        const res: Champions.ChampionsResponse = await api.ddragonRequest(
-            Champions.RestEndpoint.all,
+function extractChampionHeader(
+    res: ChampionsTypes.Response
+): ChampionsTypes.ResponseHeader {
+    return {
+        type: res.type,
+        format: res.format,
+        version: res.version,
+    };
+}
+
+export const getChampionsDTO = (api: DDragonAPI): ChampionsTypes.DTO => ({
+    all: async (version?, locale?): Promise<Array<Champion>> => {
+        const res: ChampionsTypes.Response = await api.ddragonRequest(
+            ChampionsTypes.RestEndpoint.all,
             {
                 version: version || (await api.versions.latest()),
                 locale: locale || api.regionFallback.locale,
             }
         );
-        return new Champion(res);
+        const championHeader = extractChampionHeader(res);
+        return Object.keys(res.data).map(
+            (key) => new Champion(res.data[key], championHeader)
+        );
     },
     getByChampionName: async (
         championName,
         version?,
         locale?
     ): Promise<Champion> => {
-        const res: Champions.ChampionsResponse = await api.ddragonRequest(
-            Champions.RestEndpoint.getByChampionName,
+        const res: ChampionsTypes.Response = await api.ddragonRequest(
+            ChampionsTypes.RestEndpoint.getByChampionName,
             {
                 version: version || (await api.versions.latest()),
                 locale: locale || api.regionFallback.locale,
                 championName,
             }
         );
-        return new Champion(res);
+        const championHeader = extractChampionHeader(res);
+        const champion = res.data[Object.keys(res.data)[0]];
+        return new Champion(champion, championHeader);
     },
 });
