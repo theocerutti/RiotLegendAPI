@@ -13,7 +13,7 @@ describe("DDragonAPI", () => {
             ]);
         });
 
-        test("get summoner spell by name", async () => {
+        test("get summoner spell by ID", async () => {
             const api = new DDragonAPI();
             const summonerSpells = await api.summonerSpells.all();
             const summonerSpellID = "SummonerFlash";

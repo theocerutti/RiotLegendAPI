@@ -7,11 +7,13 @@ import {
 import CachedAPI from "./CachedAPI";
 import { ChampionsTypes } from "../types/dto/ddragon/champions";
 import { DDRAGON_API_URL } from "../constants/constants";
+import { ItemsTypes } from "../types/dto/ddragon/items";
 import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
 import { VersionsTypes } from "../types/dto/ddragon/versions";
 import { compile } from "path-to-regexp";
 import { getChampionsDTO } from "../dto/ddragon/champions";
+import { getItemsDTO } from "../dto/ddragon/items";
 import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
 import { getVersionsDTO } from "../dto/ddragon/versions";
 
@@ -46,6 +48,10 @@ class DDragonAPI extends CachedAPI {
 
     get summonerSpells(): SummonerSpellsTypes.DTO {
         return getSummonerSpellsDTO(this);
+    }
+
+    get items(): ItemsTypes.DTO {
+        return getItemsDTO(this);
     }
 
     get regionFallback(): RegionFallback {

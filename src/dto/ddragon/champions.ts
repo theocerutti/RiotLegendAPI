@@ -3,8 +3,8 @@ import { ChampionsTypes } from "../../types/dto/ddragon/champions";
 import DDragonAPI from "../../api/DDragonAPI";
 
 function extractChampionHeader(
-    res: ChampionsTypes.Response
-): ChampionsTypes.ResponseHeader {
+    res: ChampionsTypes.APIResponse
+): ChampionsTypes.APIResponseHeader {
     return {
         type: res.type,
         format: res.format,
@@ -14,7 +14,7 @@ function extractChampionHeader(
 
 export const getChampionsDTO = (api: DDragonAPI): ChampionsTypes.DTO => ({
     all: async (version?, locale?): Promise<Array<Champion>> => {
-        const res: ChampionsTypes.Response = await api.ddragonRequest(
+        const res: ChampionsTypes.APIResponse = await api.ddragonRequest(
             ChampionsTypes.RestEndpoint.all,
             {
                 version: version || (await api.versions.latest()),
@@ -31,7 +31,7 @@ export const getChampionsDTO = (api: DDragonAPI): ChampionsTypes.DTO => ({
         version?,
         locale?
     ): Promise<Champion> => {
-        const res: ChampionsTypes.Response = await api.ddragonRequest(
+        const res: ChampionsTypes.APIResponse = await api.ddragonRequest(
             ChampionsTypes.RestEndpoint.getByChampionName,
             {
                 version: version || (await api.versions.latest()),

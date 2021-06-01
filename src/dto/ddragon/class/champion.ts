@@ -3,13 +3,13 @@ import { DDRAGON_API_URL } from "../../../constants/constants";
 
 // TODO: interpreting spell texts + add layer to get datas with ease
 class Champion {
-    readonly metadataChampion: ChampionsTypes.ResponseHeader;
+    readonly metadataChampion: ChampionsTypes.APIResponseHeader;
 
     readonly dataChampion: ChampionsTypes.Champion;
 
     constructor(
         championRes: ChampionsTypes.Champion,
-        championResHeader: ChampionsTypes.ResponseHeader
+        championResHeader: ChampionsTypes.APIResponseHeader
     ) {
         this.metadataChampion = championResHeader;
         this.dataChampion = championRes;
@@ -92,7 +92,7 @@ class Champion {
         return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/sprite/${this.dataChampion.image.sprite}`;
     }
 
-    get metadata(): ChampionsTypes.ResponseHeader {
+    get metadata(): ChampionsTypes.APIResponseHeader {
         return this.metadataChampion;
     }
 

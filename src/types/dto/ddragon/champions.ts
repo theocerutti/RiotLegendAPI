@@ -5,15 +5,15 @@ import { Locale } from "../../ddragon";
 import { VersionsTypes } from "./versions";
 
 export namespace ChampionsTypes {
-    export type ResponseHeader = {
+    export type APIResponseHeader = {
         type: string;
         format: string;
         version: VersionsTypes.GameVersion;
     };
 
-    export type Response = {
+    export type APIResponse = {
         data: { [key: string]: Champion };
-    } & ResponseHeader;
+    } & APIResponseHeader;
 
     export type Spell = {
         id: string;
