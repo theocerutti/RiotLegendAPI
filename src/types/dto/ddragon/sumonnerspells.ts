@@ -44,7 +44,7 @@ export namespace SummonerSpellsTypes {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         all: {
             method: "GET",
-            endpoint: "/cdn/:version/data/:locale/summoner.json",
+            repertory: "/cdn/:version/data/:locale/summoner.json",
         },
     };
 

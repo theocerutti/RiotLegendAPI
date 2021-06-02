@@ -5,7 +5,7 @@ export namespace Account {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         byPuuid: {
             method: "POST",
-            endpoint: "/riot/account/v1/accounts/by-puuid/:puuid",
+            repertory: "/riot/account/v1/accounts/by-puuid/:puuid",
         },
     };
 

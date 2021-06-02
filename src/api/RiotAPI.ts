@@ -75,13 +75,13 @@ class RiotAPI extends CachedAPI {
         restEndpointData?: { [key: string]: string | number },
         options?: RequestOptions
     ): Promise<T> {
-        const createPath = compile(restEndpoint.endpoint, {
+        const createPath = compile(restEndpoint.repertory, {
             encode: encodeURIComponent,
         });
 
-        const url = `${getRiotAPIBaseURL(platform)}${createPath(
-            restEndpointData
-        )}`;
+        const url = `${
+            restEndpoint.baseUrl || getRiotAPIBaseURL(platform)
+        }${createPath(restEndpointData)}`;
 
         return super.request(url, restEndpoint.method, {
             body: options?.body,

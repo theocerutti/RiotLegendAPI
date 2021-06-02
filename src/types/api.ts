@@ -29,4 +29,8 @@ export type RestMethod =
     | "unlink"
     | "UNLINK";
 
-export type RestEndpoint = { method: RestMethod; endpoint: Endpoint };
+export type RestEndpoint = {
+    method: RestMethod;
+    repertory: Endpoint;
+    baseUrl?: Endpoint;
+};

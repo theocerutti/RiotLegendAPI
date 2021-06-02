@@ -6,11 +6,11 @@ export namespace VersionsTypes {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         latest: {
             method: "GET",
-            endpoint: "/api/versions.json",
+            repertory: "/api/versions.json",
         },
         all: {
             method: "GET",
-            endpoint: "/api/versions.json",
+            repertory: "/api/versions.json",
         },
     };
 

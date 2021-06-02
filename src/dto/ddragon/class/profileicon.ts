@@ -15,11 +15,11 @@ class ProfileIcon {
         this.version = version;
     }
 
-    get url() {
+    get url(): string {
         return `${DDRAGON_API_URL}/cdn/${this.version}/img/profileicon/${this.image.id}.png`;
     }
 
-    get data() {
+    get data(): ProfileIconsTypes.ProfileImage {
         return this.image;
     }
 }

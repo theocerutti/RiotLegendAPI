@@ -22,7 +22,7 @@ export namespace ProfileIconsTypes {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         all: {
             method: "GET",
-            endpoint: "/cdn/:version/data/:locale/profileicon.json",
+            repertory: "/cdn/:version/data/:locale/profileicon.json",
         },
     };
 

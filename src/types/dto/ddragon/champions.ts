@@ -106,11 +106,11 @@ export namespace ChampionsTypes {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         all: {
             method: "GET",
-            endpoint: "/cdn/:version/data/:locale/champion.json",
+            repertory: "/cdn/:version/data/:locale/champion.json",
         },
         getByChampionName: {
             method: "GET",
-            endpoint: "/cdn/:version/data/:locale/champion/:championName.json",
+            repertory: "/cdn/:version/data/:locale/champion/:championName.json",
         },
     };
 

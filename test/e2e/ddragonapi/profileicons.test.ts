@@ -1,6 +1,7 @@
 import DDragonAPI from "../../../src/api/DDragonAPI";
 import ProfileIcon from "../../../src/dto/ddragon/class/profileicon";
 import ProfileIcons from "../../../src/dto/ddragon/class/profileicons";
+import { isURL } from "../../utils";
 
 describe("DDragonAPI", () => {
     describe("ProfileIcons", () => {
@@ -36,6 +37,12 @@ describe("DDragonAPI", () => {
             const profileIconID = "thisisabadid";
             const profileIcon = profileIcons.getByID(profileIconID);
             expect(profileIcon).toBeNull();
+        });
+
+        test("get profile icon url", async () => {
+            const profileIconID = "0";
+            const profileIcon = profileIcons.getByID(profileIconID);
+            expect(isURL(profileIcon.url)).toBeTruthy();
         });
     });
 });

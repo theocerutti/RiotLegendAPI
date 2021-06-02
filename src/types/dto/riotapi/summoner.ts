@@ -24,23 +24,23 @@ export namespace Summoner {
     export const RestEndpoint: DTOEndpoint<DTO> = {
         getByAccountID: {
             method: "GET",
-            endpoint: "/lol/summoner/v4/summoners/by-account/:accountID",
+            repertory: "/lol/summoner/v4/summoners/by-account/:accountID",
         },
         getByName: {
             method: "GET",
-            endpoint: "/lol/summoner/v4/summoners/by-name/:name",
+            repertory: "/lol/summoner/v4/summoners/by-name/:name",
         },
         getByPUUID: {
             method: "GET",
-            endpoint: "/lol/summoner/v4/summoners/by-puuid/:puuid",
+            repertory: "/lol/summoner/v4/summoners/by-puuid/:puuid",
         },
         getByID: {
             method: "GET",
-            endpoint: "/lol/summoner/v4/summoners/:id",
+            repertory: "/lol/summoner/v4/summoners/:id",
         },
         getMe: {
             method: "GET",
-            endpoint: "/riot/account/v1/accounts/me",
+            repertory: "/riot/account/v1/accounts/me",
         },
     };
 

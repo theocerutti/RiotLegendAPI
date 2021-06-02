@@ -8,6 +8,7 @@ import CachedAPI from "./CachedAPI";
 import { ChampionsTypes } from "../types/dto/ddragon/champions";
 import { DDRAGON_API_URL } from "../constants/constants";
 import { ItemsTypes } from "../types/dto/ddragon/items";
+import { MinimapTypes } from "../types/dto/ddragon/minimaps";
 import { ProfileIconsTypes } from "../types/dto/ddragon/profileicons";
 import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
@@ -15,6 +16,7 @@ import { VersionsTypes } from "../types/dto/ddragon/versions";
 import { compile } from "path-to-regexp";
 import { getChampionsDTO } from "../dto/ddragon/champions";
 import { getItemsDTO } from "../dto/ddragon/items";
+import { getMinimapsDTO } from "../dto/ddragon/minimaps";
 import { getProfileIconsDTO } from "../dto/ddragon/profileicons";
 import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
 import { getVersionsDTO } from "../dto/ddragon/versions";
@@ -60,6 +62,10 @@ class DDragonAPI extends CachedAPI {
         return getProfileIconsDTO(this);
     }
 
+    get minimaps(): MinimapTypes.DTO {
+        return getMinimapsDTO(this);
+    }
+
     get regionFallback(): RegionFallback {
         const fullFallback = this.defaultRegionFallback;
         Object.keys({
@@ -82,11 +88,13 @@ class DDragonAPI extends CachedAPI {
         restEndpoint: RestEndpoint,
         restEndpointData?: { [key: string]: string | number }
     ): Promise<T> {
-        const createPath = compile(restEndpoint.endpoint, {
+        const createPath = compile(restEndpoint.repertory, {
             encode: encodeURIComponent,
         });
 
-        const url = `${DDRAGON_API_URL}${createPath(restEndpointData)}`;
+        const url = `${restEndpoint.baseUrl || DDRAGON_API_URL}${createPath(
+            restEndpointData
+        )}`;
         return super.request(url, restEndpoint.method);
     }
 }
