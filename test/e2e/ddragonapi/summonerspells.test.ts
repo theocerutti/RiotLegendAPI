@@ -3,9 +3,15 @@ import SummonerSpells from "../../../src/dto/ddragon/class/summonerspells";
 
 describe("DDragonAPI", () => {
     describe("SummonerSpells", () => {
+        let api = null;
+        let summonerSpells = null;
+
+        beforeAll(async () => {
+            api = new DDragonAPI();
+            summonerSpells = await api.summonerSpells.all();
+        });
+
         test("get all summoner spells", async () => {
-            const api = new DDragonAPI();
-            const summonerSpells = await api.summonerSpells.all();
             expect(summonerSpells).toBeInstanceOf(SummonerSpells);
             expect(Object.keys(summonerSpells.metadata)).toEqual([
                 "type",
@@ -14,11 +20,15 @@ describe("DDragonAPI", () => {
         });
 
         test("get summoner spell by ID", async () => {
-            const api = new DDragonAPI();
-            const summonerSpells = await api.summonerSpells.all();
             const summonerSpellID = "SummonerFlash";
             const summonerSpell = summonerSpells.getByID(summonerSpellID);
             expect(summonerSpell.id).toBe(summonerSpellID);
+        });
+
+        test("get summoner spell with bad ID", async () => {
+            const summonerSpellID = "thisisabadid";
+            const summonerSpell = summonerSpells.getByID(summonerSpellID);
+            expect(summonerSpell).toBeNull();
         });
     });
 });

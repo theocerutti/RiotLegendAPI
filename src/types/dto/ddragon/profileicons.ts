@@ -15,7 +15,7 @@ export namespace ProfileIconsTypes {
     } & APIResponseHeader;
 
     export type ProfileImage = {
-        id: string;
+        id: number;
         image: Image;
     };
 

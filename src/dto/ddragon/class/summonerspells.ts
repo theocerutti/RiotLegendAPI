@@ -8,14 +8,14 @@ class SummonerSpells {
         this.dataSummonerSpell = summonerSpell;
     }
 
-    getByID(id: string): SummonerSpellsTypes.SummonerSpell {
+    getByID(id: string): SummonerSpellsTypes.SummonerSpell | null {
         if (
             !Object.prototype.hasOwnProperty.call(
                 this.dataSummonerSpell.data,
                 id
             )
         ) {
-            throw new Error(`Summoner Spell with ID=${id} doesn't exists!`);
+            return null;
         }
         return this.dataSummonerSpell.data[id];
     }

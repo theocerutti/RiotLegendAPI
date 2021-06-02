@@ -4,9 +4,17 @@ import { isURL } from "../../utils";
 
 describe("DDragonAPI", () => {
     describe("Champions", () => {
+        let api = null;
+        let champions = null;
+        let zyraChampion = null;
+
+        beforeAll(async () => {
+            api = new DDragonAPI();
+            champions = await api.champions.all();
+            zyraChampion = await api.champions.getByChampionName("Zyra");
+        });
+
         test("get all champions", async () => {
-            const api = new DDragonAPI();
-            const champions = await api.champions.all();
             expect(champions).toBeInstanceOf(Array);
             const firstChampion = champions[0];
             expect(firstChampion).toBeInstanceOf(Champion);
@@ -18,10 +26,8 @@ describe("DDragonAPI", () => {
         });
 
         test("get champion by name", async () => {
-            const api = new DDragonAPI();
-            const champions = await api.champions.getByChampionName("Zyra");
-            expect(champions).toBeInstanceOf(Champion);
-            expect(Object.keys(champions.metadata)).toEqual([
+            expect(zyraChampion).toBeInstanceOf(Champion);
+            expect(Object.keys(zyraChampion.metadata)).toEqual([
                 "type",
                 "format",
                 "version",
@@ -29,27 +35,37 @@ describe("DDragonAPI", () => {
         });
 
         test("get assets", async () => {
-            const api = new DDragonAPI();
-            const champion = await api.champions.getByChampionName("Zyra");
-            expect(champion).toBeInstanceOf(Champion);
-            champion
+            expect(zyraChampion).toBeInstanceOf(Champion);
+            zyraChampion
                 .getAllAbilityAssetUrl()
                 .map((abilityUrl) => expect(isURL(abilityUrl)).toBeTruthy());
-            champion
+            zyraChampion
                 .getAllLoadingAssetUrl()
                 .map((loadingUrl) => expect(isURL(loadingUrl)).toBeTruthy());
-            champion
+            zyraChampion
                 .getAllSplashAssetUrl()
                 .map((splashUrl) => expect(isURL(splashUrl)).toBeTruthy());
-            expect(isURL(champion.getSquareAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getLoadingAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getSplashAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getSpriteSheetUrl())).toBeTruthy();
-            expect(isURL(champion.getPassiveAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getQSpellAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getWSpellAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getESpellAssetUrl())).toBeTruthy();
-            expect(isURL(champion.getRSpellAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getSquareAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getLoadingAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getSplashAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getSpriteSheetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getPassiveAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getQSpellAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getWSpellAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getESpellAssetUrl())).toBeTruthy();
+            expect(isURL(zyraChampion.getRSpellAssetUrl())).toBeTruthy();
+        });
+
+        test("get assets with bad parameters", async () => {
+            expect(zyraChampion).toBeInstanceOf(Champion);
+            expect(isURL(zyraChampion.getSplashAssetUrl(-2))).toBeFalsy();
+            expect(zyraChampion.getSplashAssetUrl(-2)).toBeNull();
+            expect(isURL(zyraChampion.getLoadingAssetUrl(99999))).toBeFalsy();
+            expect(zyraChampion.getLoadingAssetUrl(99999)).toBeNull();
+            expect(
+                isURL(zyraChampion.getAbilityAssetUrl("...bad_id..."))
+            ).toBeFalsy();
+            expect(zyraChampion.getAbilityAssetUrl("...bad_id...")).toBeNull();
         });
     });
 });

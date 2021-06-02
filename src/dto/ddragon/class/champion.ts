@@ -18,17 +18,13 @@ class Champion {
     private getAssetUrl(
         skinNumber: number,
         type: "splash" | "loading"
-    ): string {
+    ): string | null {
         if (skinNumber < 0 || skinNumber > this.dataChampion.skins.length)
-            throw new Error(
-                `${
-                    this.dataChampion.id || "This Champion"
-                } doesn't have skin°${skinNumber}.`
-            );
+            return null;
         return `${DDRAGON_API_URL}/cdn/img/champion/${type}/${this.dataChampion.id}_${skinNumber}.jpg`;
     }
 
-    getSplashAssetUrl(skinNumber: number = 0): string {
+    getSplashAssetUrl(skinNumber: number = 0): string | null {
         return this.getAssetUrl(skinNumber, "splash");
     }
 
@@ -38,7 +34,7 @@ class Champion {
         );
     }
 
-    getLoadingAssetUrl(skinNumber: number = 0): string {
+    getLoadingAssetUrl(skinNumber: number = 0): string | null {
         return this.getAssetUrl(skinNumber, "loading");
     }
 
@@ -56,13 +52,13 @@ class Champion {
         return `http://ddragon.leagueoflegends.com/cdn/11.11.1/img/passive/${this.dataChampion.passive.image.full}`;
     }
 
-    getAbilityAssetUrl(id: string): string {
+    getAbilityAssetUrl(id: string): string | null {
         const spellIndex: number = this.dataChampion.spells.findIndex(
             (spell) => spell.id === id
         );
 
         if (spellIndex < 0 || spellIndex > this.dataChampion.spells.length)
-            throw new Error(`Can't find Ability Asset with ID: ${id}`);
+            return null;
         return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/spell/${this.dataChampion.spells[spellIndex].image.full}`;
     }
 

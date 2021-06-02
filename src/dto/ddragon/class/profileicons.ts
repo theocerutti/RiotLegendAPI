@@ -1,28 +1,44 @@
+import ProfileIcon from "./profileicon";
 import { ProfileIconsTypes } from "../../../types/dto/ddragon/profileicons";
 
 class ProfileIcons {
-    readonly profileIcons: ProfileIconsTypes.APIResponse;
+    readonly profileIconsRawData: ProfileIconsTypes.APIResponse;
+
+    readonly profileIcons: Array<ProfileIcon> = [];
 
     constructor(profileIcons: ProfileIconsTypes.APIResponse) {
-        this.profileIcons = profileIcons;
+        this.profileIconsRawData = profileIcons;
+        this.profileIcons = Object.keys(profileIcons.data).map(
+            (iconID) =>
+                new ProfileIcon(profileIcons.data[iconID], profileIcons.version)
+        );
     }
 
-    getByID(id: string): ProfileIconsTypes.ProfileImage {
-        if (!Object.prototype.hasOwnProperty.call(this.profileIcons.data, id)) {
-            throw new Error(`Profile Icon with ID=${id} doesn't exists!`);
+    getByID(id: string | number): ProfileIcon | null {
+        let parsedId = id;
+
+        if (typeof id === "string") parsedId = parseInt(id, 10);
+        for (let i = 0; i < this.profileIcons.length; i++) {
+            if (this.profileIcons[i].data.id === parsedId) {
+                return this.profileIcons[i];
+            }
         }
-        return this.profileIcons.data[id];
+        return null;
     }
 
     get metadata(): ProfileIconsTypes.APIResponseHeader {
         return {
-            type: this.profileIcons.type,
-            version: this.profileIcons.version,
+            type: this.profileIconsRawData.type,
+            version: this.profileIconsRawData.version,
         };
     }
 
-    get data(): { [key: string]: ProfileIconsTypes.ProfileImage } {
-        return this.profileIcons.data;
+    get icons(): Array<ProfileIcon> {
+        return this.profileIcons;
+    }
+
+    get rawData(): { [key: string]: ProfileIconsTypes.ProfileImage } {
+        return this.profileIconsRawData.data;
     }
 }
 

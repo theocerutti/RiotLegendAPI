@@ -8,19 +8,19 @@ class Items {
         this.items = items;
     }
 
-    getByID(id: string): ItemsTypes.Item {
+    getByID(id: string): ItemsTypes.Item | null {
         if (!Object.prototype.hasOwnProperty.call(this.items.data, id)) {
-            throw new Error(`Item with ID=${id} doesn't exists!`);
+            return null;
         }
         return this.items.data[id];
     }
 
-    getByName(name: string): ItemsTypes.Item {
+    getByName(name: string): ItemsTypes.Item | null {
         const filteredItems = Object.values(this.items.data).filter(
             (it) => it.name === name
         );
         if (!filteredItems || filteredItems.length <= 0) {
-            throw new Error(`Item with Name=${name} doesn't exists!`);
+            return null;
         }
         return filteredItems[0];
     }
