@@ -15,10 +15,9 @@ describe("DDragonAPI", () => {
 
         test("get all profile icons", async () => {
             expect(profileIcons).toBeInstanceOf(ProfileIcons);
-            expect(Object.keys(profileIcons.metadata)).toEqual([
-                "type",
-                "version",
-            ]);
+            expect(Object.keys(profileIcons.metadata).sort()).toEqual(
+                ["type", "version"].sort()
+            );
         });
 
         test("get profile icon by ID", async () => {

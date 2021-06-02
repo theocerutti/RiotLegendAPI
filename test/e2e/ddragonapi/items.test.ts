@@ -13,13 +13,9 @@ describe("DDragonAPI", () => {
 
         test("get all items", async () => {
             expect(items).toBeInstanceOf(Items);
-            expect(Object.keys(items.metadata)).toEqual([
-                "type",
-                "version",
-                "basic",
-                "groups",
-                "tree",
-            ]);
+            expect(Object.keys(items.metadata).sort()).toEqual(
+                ["type", "version", "basic", "groups", "tree"].sort()
+            );
         });
 
         test("get item by ID", async () => {

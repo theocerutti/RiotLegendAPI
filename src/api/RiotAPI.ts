@@ -7,11 +7,13 @@ import {
 import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
 import CachedAPI from "./CachedAPI";
+import { ChampionMasteriesTypes } from "../types/dto/riotapi/championmasteries";
 import DDragonAPI from "./DDragonAPI";
 import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
-import { Summoner } from "../types/dto/riotapi/summoner";
+import { SummonerTypes } from "../types/dto/riotapi/summoner";
 import { compile } from "path-to-regexp";
+import { getChampionMasteriesDTO } from "../dto/riotapi/championmasteries";
 import { getRiotAPIBaseURL } from "./utils/endpoint";
 import { getSummonerDTO } from "../dto/riotapi/summoner";
 
@@ -64,8 +66,12 @@ class RiotAPI extends CachedAPI {
     }
 
     // DTOs accessors
-    get summoner(): Summoner.DTO {
+    get summoner(): SummonerTypes.DTO {
         return getSummonerDTO(this);
+    }
+
+    get championMasteries(): ChampionMasteriesTypes.DTO {
+        return getChampionMasteriesDTO(this);
     }
 
     // UTILS

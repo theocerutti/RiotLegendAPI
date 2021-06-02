@@ -1,8 +1,9 @@
 import { AccessToken } from "../../api";
 import { DTOEndpoint } from "../dto";
 import { RegionName } from "../../endpoints";
+import SummonerClass from "./class/summoner";
 
-export namespace Summoner {
+export namespace SummonerTypes {
     export type ID = string;
     export type AccountID = string;
     export type PUUID = string;
@@ -12,12 +13,22 @@ export namespace Summoner {
     export type SummonerLevel = number;
 
     export type Summoner = {
+        /* Encrypted account ID. Max length 56 characters. */
         id: ID;
+        /* Encrypted summoner ID. Max length 63 characters. */
         accountId: AccountID;
+        /* Encrypted PUUID. Exact length of 78 characters. */
         puuid: PUUID;
+        /* Summoner name. */
         name: Name;
+        /* ID of the summoner icon associated with the summoner. */
         profileIconId: ProfileIconID;
+        /*
+            Date summoner was last modified specified as epoch milliseconds.
+            The following events will update this timestamp: summoner name change, summoner level change, or profile icon change.
+        */
         revisionDate: RevisionDate;
+        /* Summoner level associated with the summoner. */
         summonerLevel: SummonerLevel;
     };
 
@@ -48,10 +59,13 @@ export namespace Summoner {
         getByAccountID(
             accountID: AccountID,
             region?: RegionName
-        ): Promise<Summoner>;
-        getByName(name: Name, region?: RegionName): Promise<Summoner>;
-        getByPUUID(puuid: PUUID, region?: RegionName): Promise<Summoner>;
-        getByID(id: ID, region?: RegionName): Promise<Summoner>;
-        getMe(accessToken: AccessToken, region?: RegionName): Promise<Summoner>;
+        ): Promise<SummonerClass>;
+        getByName(name: Name, region?: RegionName): Promise<SummonerClass>;
+        getByPUUID(puuid: PUUID, region?: RegionName): Promise<SummonerClass>;
+        getByID(id: ID, region?: RegionName): Promise<SummonerClass>;
+        getMe(
+            accessToken: AccessToken,
+            region?: RegionName
+        ): Promise<SummonerClass>;
     };
 }

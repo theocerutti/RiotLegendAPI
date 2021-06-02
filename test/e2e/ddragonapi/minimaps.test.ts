@@ -19,11 +19,9 @@ describe("DDragonAPI", () => {
             expect(allMinimaps).toBeInstanceOf(Array);
             const firstMinimap = allMinimaps[0];
             expect(firstMinimap).toBeInstanceOf(Minimap);
-            expect(Object.keys(firstMinimap.data)).toEqual([
-                "mapId",
-                "mapName",
-                "notes",
-            ]);
+            expect(Object.keys(firstMinimap.data).sort()).toEqual(
+                ["mapId", "mapName", "notes"].sort()
+            );
             expect(isURL(firstMinimap.url)).toBeTruthy();
         });
     });

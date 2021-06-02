@@ -83,8 +83,10 @@ export namespace ChampionsTypes {
         attackspeed: number;
     };
 
+    export type ChampionID = string;
+
     export type Champion = {
-        id: string;
+        id: ChampionID;
         key: string;
         name: string;
         title: string;

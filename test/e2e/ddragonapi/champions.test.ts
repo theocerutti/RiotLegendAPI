@@ -18,20 +18,16 @@ describe("DDragonAPI", () => {
             expect(champions).toBeInstanceOf(Array);
             const firstChampion = champions[0];
             expect(firstChampion).toBeInstanceOf(Champion);
-            expect(Object.keys(firstChampion.metadata)).toEqual([
-                "type",
-                "format",
-                "version",
-            ]);
+            expect(Object.keys(firstChampion.metadata).sort()).toEqual(
+                ["type", "format", "version"].sort()
+            );
         });
 
         test("get champion by name", async () => {
             expect(zyraChampion).toBeInstanceOf(Champion);
-            expect(Object.keys(zyraChampion.metadata)).toEqual([
-                "type",
-                "format",
-                "version",
-            ]);
+            expect(Object.keys(zyraChampion.metadata).sort()).toEqual(
+                ["type", "format", "version"].sort()
+            );
         });
 
         test("get assets", async () => {

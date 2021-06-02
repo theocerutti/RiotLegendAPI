@@ -13,10 +13,9 @@ describe("DDragonAPI", () => {
 
         test("get all summoner spells", async () => {
             expect(summonerSpells).toBeInstanceOf(SummonerSpells);
-            expect(Object.keys(summonerSpells.metadata)).toEqual([
-                "type",
-                "version",
-            ]);
+            expect(Object.keys(summonerSpells.metadata).sort()).toEqual(
+                ["type", "version"].sort()
+            );
         });
 
         test("get summoner spell by ID", async () => {
