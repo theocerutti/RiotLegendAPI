@@ -1,7 +1,7 @@
-import { AccessToken } from "../../api";
-import { DTOEndpoint } from "../dto";
-import { RegionName } from "../../endpoints";
-import SummonerClass from "./class/summoner";
+import { AccessToken } from "../../../api";
+import { DTOEndpoint } from "../../dto";
+import { RegionName } from "../../../endpoints";
+import SummonerClass from "../../../../dto/riotapi/summoner/Summoner";
 
 export namespace SummonerTypes {
     export type ID = string;
@@ -12,7 +12,7 @@ export namespace SummonerTypes {
     export type RevisionDate = number;
     export type SummonerLevel = number;
 
-    export type Summoner = {
+    export type SummonerAPIResponse = {
         /* Encrypted account ID. Max length 56 characters. */
         id: ID;
         /* Encrypted summoner ID. Max length 63 characters. */
@@ -55,7 +55,7 @@ export namespace SummonerTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         getByAccountID(
             accountID: AccountID,
             region?: RegionName
@@ -67,5 +67,5 @@ export namespace SummonerTypes {
             accessToken: AccessToken,
             region?: RegionName
         ): Promise<SummonerClass>;
-    };
+    }
 }

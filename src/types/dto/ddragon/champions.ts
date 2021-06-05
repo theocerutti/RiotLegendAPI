@@ -15,9 +15,11 @@ export namespace ChampionsTypes {
         data: { [key: string]: Champion };
     } & APIResponseHeader;
 
+    export type Name = string;
+
     export type Spell = {
         id: string;
-        name: string;
+        name: Name;
         description: string;
         tooltip: string;
         leveltip: {
@@ -54,11 +56,13 @@ export namespace ChampionsTypes {
         image: Image;
     };
 
+    export type ChampionDifficultyLevel = number;
+
     export type Info = {
         attack: number;
         defense: number;
         magic: number;
-        difficulty: number;
+        difficulty: ChampionDifficultyLevel;
     };
 
     export type Stats = {

@@ -1,32 +1,18 @@
-import RiotAPI from "../../../src";
+import RiotAPI from "../../../../src";
+import Summoner from "../../../../src/dto/riotapi/summoner/Summoner";
+import { checkIfValidSummoner } from "../../../utils";
 
 const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 
 describe("RiotAPI", () => {
     describe("Summoner", () => {
-        let api = null;
-        let summoner = null;
+        let api: RiotAPI = null;
+        let summoner: Summoner = null;
 
         beforeAll(async () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
             summoner = await api.summoner.getByName("Priciiix", "euw1");
         });
-
-        const checkIfValidSummoner = (summ) => {
-            const summData = summ.data;
-            expect(summData.name).toEqual("Priciiix");
-            expect(Object.keys(summData).sort()).toEqual(
-                [
-                    "id",
-                    "accountId",
-                    "puuid",
-                    "name",
-                    "profileIconId",
-                    "revisionDate",
-                    "summonerLevel",
-                ].sort()
-            );
-        };
 
         test("getBySummonerName", async () => {
             checkIfValidSummoner(summoner);

@@ -7,15 +7,13 @@ import {
 import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
 import CachedAPI from "./CachedAPI";
-import { ChampionMasteriesTypes } from "../types/dto/riotapi/championmasteries";
+import ChampionMasteryDTO from "../dto/riotapi/championmastery/ChampionMasteryDTO";
 import DDragonAPI from "./DDragonAPI";
 import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
-import { SummonerTypes } from "../types/dto/riotapi/summoner";
+import SummonerDTO from "../dto/riotapi/summoner/SummonerDTO";
 import { compile } from "path-to-regexp";
-import { getChampionMasteriesDTO } from "../dto/riotapi/championmasteries";
 import { getRiotAPIBaseURL } from "./utils/endpoint";
-import { getSummonerDTO } from "../dto/riotapi/summoner";
 
 export const DEFAULT_REGION_FALLBACK: RegionName = "euw1";
 export const DEFAULT_CLUSTER_FALLBACK: ClusterName = "europe";
@@ -27,6 +25,10 @@ class RiotAPI extends CachedAPI {
 
     private defaultRegionFallback: RegionFallback;
 
+    private readonly summonerDTO: SummonerDTO;
+
+    private readonly championMasteryDTO: ChampionMasteryDTO;
+
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
@@ -37,6 +39,10 @@ class RiotAPI extends CachedAPI {
         };
         this.apiConfig = config;
         this.dDragonApi = new DDragonAPI({ cache: config.cache });
+
+        // DTOs
+        this.summonerDTO = new SummonerDTO(this);
+        this.championMasteryDTO = new ChampionMasteryDTO(this);
     }
 
     get dDragon(): DDragonAPI {
@@ -66,12 +72,12 @@ class RiotAPI extends CachedAPI {
     }
 
     // DTOs accessors
-    get summoner(): SummonerTypes.DTO {
-        return getSummonerDTO(this);
+    get summoner(): SummonerDTO {
+        return this.summonerDTO;
     }
 
-    get championMasteries(): ChampionMasteriesTypes.DTO {
-        return getChampionMasteriesDTO(this);
+    get championMastery(): ChampionMasteryDTO {
+        return this.championMasteryDTO;
     }
 
     // UTILS

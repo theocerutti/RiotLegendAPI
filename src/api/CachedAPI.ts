@@ -3,7 +3,6 @@ import { RequestOptions, RestMethod } from "../types/api";
 import { CacheConfig } from "../types/cachedapi";
 import Redis from "ioredis";
 import fetch from "node-fetch";
-import { logger } from "../logger";
 
 class CachedAPI {
     protected readonly cache?: MemoryCache | RedisCache;
@@ -36,9 +35,7 @@ class CachedAPI {
         expirationMs?: number
     ): Promise<T | null> {
         if (this.cache && expirationMs) {
-            const cacheValue = (await this.cache.get(url)) as T | null;
-            if (cacheValue) logger.info(`Cache: Hit ${key} ${url}`);
-            return cacheValue;
+            return (await this.cache.get(url)) as T | null;
         }
         return null;
     }
@@ -50,7 +47,6 @@ class CachedAPI {
         expirationMs?: number
     ): Promise<void> {
         if (this.cache && expirationMs) {
-            logger.info(`Cache: Setting ${key} ${url}`);
             await this.cache.set(url, data, expirationMs);
         }
     }

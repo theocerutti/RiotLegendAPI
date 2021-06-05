@@ -1,3 +1,35 @@
+export const checkIfChampionMasteryIsValid = (champMastery) => {
+    expect(Object.keys(champMastery).sort()).toEqual(
+        [
+            "championPointsUntilNextLevel",
+            "chestGranted",
+            "championId",
+            "lastPlayTime",
+            "championLevel",
+            "summonerId",
+            "championPoints",
+            "championPointsSinceLastLevel",
+            "tokensEarned",
+        ].sort()
+    );
+};
+
+export const checkIfValidSummoner = (summ) => {
+    const summData = summ.data;
+    expect(summData.name).toEqual("Priciiix");
+    expect(Object.keys(summData).sort()).toEqual(
+        [
+            "id",
+            "accountId",
+            "puuid",
+            "name",
+            "profileIconId",
+            "revisionDate",
+            "summonerLevel",
+        ].sort()
+    );
+};
+
 export function isURL(str) {
     if (str && str.length > 0) {
         const pattern = new RegExp(
