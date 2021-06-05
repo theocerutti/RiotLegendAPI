@@ -1,3 +1,4 @@
+import APIStatusDTO from "../dto/riotapi/apistatus/APIStatusDTO";
 import {
     ClusterName,
     PlatformName,
@@ -32,6 +33,8 @@ class RiotAPI extends CachedAPI {
 
     private readonly championRotationDTO: ChampionRotationDTO;
 
+    private readonly apiStatusDTO: APIStatusDTO;
+
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
@@ -47,6 +50,7 @@ class RiotAPI extends CachedAPI {
         this.summonerDTO = new SummonerDTO(this);
         this.championMasteryDTO = new ChampionMasteryDTO(this);
         this.championRotationDTO = new ChampionRotationDTO(this);
+        this.apiStatusDTO = new APIStatusDTO(this);
     }
 
     get dDragon(): DDragonAPI {
@@ -86,6 +90,10 @@ class RiotAPI extends CachedAPI {
 
     get championRotation(): ChampionRotationDTO {
         return this.championRotationDTO;
+    }
+
+    get apiStatus(): APIStatusDTO {
+        return this.apiStatusDTO;
     }
 
     // UTILS

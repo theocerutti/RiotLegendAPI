@@ -18,7 +18,7 @@ class ChampionMasteryDTO extends DTO implements ChampionMasteryTypes.DTO {
         const regionReq = region || this.api.regionFallback.region;
         const championMasteries: Array<ChampionMasteryTypes.ChampionMasteryAPIResponse> =
             await this.api.riotRequest(
-                region || this.api.regionFallback.region,
+                regionReq,
                 ChampionMasteryTypes.RestEndpoint.getByAccountID,
                 {
                     accountID,
@@ -38,7 +38,7 @@ class ChampionMasteryDTO extends DTO implements ChampionMasteryTypes.DTO {
         const regionReq = region || this.api.regionFallback.region;
         const championMastery: ChampionMasteryTypes.ChampionMasteryAPIResponse =
             await this.api.riotRequest(
-                region || this.api.regionFallback.region,
+                regionReq,
                 ChampionMasteryTypes.RestEndpoint.getByChampion,
                 {
                     accountID,

@@ -1,3 +1,9 @@
+export const checkIfAPIStatusIsValid = (apiStatus) => {
+    expect(Object.keys(apiStatus).sort()).toEqual(
+        ["id", "name", "locales", "maintenances", "incidents"].sort()
+    );
+};
+
 export const checkIfChampionIsValid = (champion) => {
     expect(Object.keys(champion).sort()).toEqual(
         [
