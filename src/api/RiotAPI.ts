@@ -1,4 +1,3 @@
-import APIStatusDTO from "../dto/riotapi/apistatus/APIStatusDTO";
 import {
     ClusterName,
     PlatformName,
@@ -7,10 +6,12 @@ import {
 } from "../types/endpoints";
 import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
+import APIStatusDTO from "../dto/riotapi/apistatus/APIStatusDTO";
 import CachedAPI from "./CachedAPI";
 import ChampionMasteryDTO from "../dto/riotapi/championmastery/ChampionMasteryDTO";
 import ChampionRotationDTO from "../dto/riotapi/championrotation/ChampionRotationDTO";
 import DDragonAPI from "./DDragonAPI";
+import MatchDTO from "../dto/riotapi/match/MatchDTO";
 import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
 import SummonerDTO from "../dto/riotapi/summoner/SummonerDTO";
@@ -35,6 +36,8 @@ class RiotAPI extends CachedAPI {
 
     private readonly apiStatusDTO: APIStatusDTO;
 
+    private readonly matchDTO: MatchDTO;
+
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
@@ -51,6 +54,7 @@ class RiotAPI extends CachedAPI {
         this.championMasteryDTO = new ChampionMasteryDTO(this);
         this.championRotationDTO = new ChampionRotationDTO(this);
         this.apiStatusDTO = new APIStatusDTO(this);
+        this.matchDTO = new MatchDTO(this);
     }
 
     get dDragon(): DDragonAPI {
@@ -94,6 +98,10 @@ class RiotAPI extends CachedAPI {
 
     get apiStatus(): APIStatusDTO {
         return this.apiStatusDTO;
+    }
+
+    get match(): MatchDTO {
+        return this.matchDTO;
     }
 
     // UTILS

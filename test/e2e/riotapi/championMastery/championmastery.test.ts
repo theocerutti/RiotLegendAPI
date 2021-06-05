@@ -1,7 +1,11 @@
+import {
+    DEFAULT_REGION_NAME,
+    DEFAULT_SUMMONER_NAME,
+    checkIfChampionMasteryIsValid,
+} from "../../../utils";
 import ChampionMastery from "../../../../src/dto/riotapi/championmastery/ChampionMastery";
 import RiotAPI from "../../../../src";
 import Summoner from "../../../../src/dto/riotapi/summoner/Summoner";
-import { checkIfChampionMasteryIsValid } from "../../../utils";
 
 const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 
@@ -12,13 +16,13 @@ describe("RiotAPI", () => {
 
         beforeAll(async () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
-            summoner = await api.summoner.getByName("Priciiix");
+            summoner = await api.summoner.getByName(DEFAULT_SUMMONER_NAME);
         });
 
         test("getByAccountID", async () => {
             const masteries = await api.championMastery.getByAccountID(
                 summoner.data.id,
-                "euw1"
+                DEFAULT_REGION_NAME
             );
             expect(masteries).toBeInstanceOf(Array);
             const firstMastery = masteries[0];
@@ -37,7 +41,7 @@ describe("RiotAPI", () => {
             const mastery = await api.championMastery.getByChampion(
                 summoner.data.id,
                 championID,
-                "euw1"
+                DEFAULT_REGION_NAME
             );
             expect(mastery).toBeInstanceOf(ChampionMastery);
             checkIfChampionMasteryIsValid(mastery.data);
@@ -52,7 +56,7 @@ describe("RiotAPI", () => {
         test("getTotalScore", async () => {
             const totalMasteryScore = await api.championMastery.getTotalScore(
                 summoner.data.id,
-                "euw1"
+                DEFAULT_REGION_NAME
             );
             const totalMasteryScore2 =
                 await summoner.championMastery.getTotalScore();

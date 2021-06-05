@@ -1,3 +1,4 @@
+import { DEFAULT_REGION_NAME, DEFAULT_SUMMONER_NAME } from "../../../../utils";
 import ChampionMastery from "../../../../../src/dto/riotapi/championmastery/ChampionMastery";
 import RiotAPI from "../../../../../src";
 import Summoner from "../../../../../src/dto/riotapi/summoner/Summoner";
@@ -12,7 +13,10 @@ describe("RiotAPI", () => {
 
         beforeAll(async () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
-            summoner = await api.summoner.getByName("Priciiix", "euw1");
+            summoner = await api.summoner.getByName(
+                DEFAULT_SUMMONER_NAME,
+                DEFAULT_REGION_NAME
+            );
             const masteries = await api.championMastery.getByAccountID(
                 summoner.id
             );

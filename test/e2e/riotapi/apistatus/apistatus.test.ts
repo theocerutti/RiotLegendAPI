@@ -1,5 +1,5 @@
+import { DEFAULT_REGION_NAME, checkIfAPIStatusIsValid } from "../../../utils";
 import RiotAPI from "../../../../src";
-import { checkIfAPIStatusIsValid } from "../../../utils";
 
 const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 
@@ -12,7 +12,7 @@ describe("RiotAPI", () => {
         });
 
         test("getStatus", async () => {
-            const status = await api.apiStatus.getStatus("euw1");
+            const status = await api.apiStatus.getStatus(DEFAULT_REGION_NAME);
             checkIfAPIStatusIsValid(status);
         });
     });

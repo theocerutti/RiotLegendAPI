@@ -1,6 +1,10 @@
+import {
+    DEFAULT_REGION_NAME,
+    DEFAULT_SUMMONER_NAME,
+    checkIfValidSummoner,
+} from "../../../utils";
 import RiotAPI from "../../../../src";
 import Summoner from "../../../../src/dto/riotapi/summoner/Summoner";
-import { checkIfValidSummoner } from "../../../utils";
 
 const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 
@@ -11,32 +15,38 @@ describe("RiotAPI", () => {
 
         beforeAll(async () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
-            summoner = await api.summoner.getByName("Priciiix", "euw1");
+            summoner = await api.summoner.getByName(
+                DEFAULT_SUMMONER_NAME,
+                DEFAULT_REGION_NAME
+            );
         });
 
         test("getBySummonerName", async () => {
-            checkIfValidSummoner(summoner);
+            checkIfValidSummoner(summoner.data);
         });
 
         test("getByAccountID", async () => {
             const resp = await api.summoner.getByAccountID(
                 summoner.data.accountId,
-                "euw1"
+                DEFAULT_REGION_NAME
             );
-            checkIfValidSummoner(resp);
+            checkIfValidSummoner(resp.data);
         });
 
         test("getByPUUID", async () => {
             const resp = await api.summoner.getByPUUID(
                 summoner.data.puuid,
-                "euw1"
+                DEFAULT_REGION_NAME
             );
-            checkIfValidSummoner(resp);
+            checkIfValidSummoner(resp.data);
         });
 
         test("getByID", async () => {
-            const resp = await api.summoner.getByID(summoner.data.id, "euw1");
-            checkIfValidSummoner(resp);
+            const resp = await api.summoner.getByID(
+                summoner.data.id,
+                DEFAULT_REGION_NAME
+            );
+            checkIfValidSummoner(resp.data);
         });
 
         // TODO: add getMe test

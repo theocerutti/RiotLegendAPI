@@ -1,10 +1,35 @@
-export const checkIfAPIStatusIsValid = (apiStatus) => {
+import { APIStatusTypes } from "../../src/types/dto/riotapi/apistatus/APIStatusDTO";
+import { ChampionMasteryTypes } from "../../src/types/dto/riotapi/championmastery/ChampionMasteryDTO";
+import { ChampionRotationTypes } from "../../src/types/dto/riotapi/championrotation/ChampionRotationDTO";
+import { ChampionsTypes } from "../../src/types/dto/ddragon/champions";
+import { MatchTypes } from "../../src/types/dto/riotapi/match/MatchDTO";
+import { SummonerTypes } from "../../src/types/dto/riotapi/summoner/summonerDTO";
+
+export const DEFAULT_SUMMONER_NAME = "Priciiix";
+export const DEFAULT_REGION_NAME = "euw1";
+export const DEFAULT_PLATFORM_NAME = "europe";
+
+export const checkIfMatchIsValid = (match: MatchTypes.Match) => {
+    expect(Object.keys(match).sort()).toEqual(["info", "metadata"].sort());
+};
+
+export const checkIfMatchTimeLineIsValid = (
+    matchTimeLine: MatchTypes.MatchTimeLine
+) => {
+    expect(Object.keys(matchTimeLine).sort()).toEqual(
+        ["info", "metadata"].sort()
+    );
+};
+
+export const checkIfAPIStatusIsValid = (
+    apiStatus: APIStatusTypes.PlatformDataDTO
+) => {
     expect(Object.keys(apiStatus).sort()).toEqual(
         ["id", "name", "locales", "maintenances", "incidents"].sort()
     );
 };
 
-export const checkIfChampionIsValid = (champion) => {
+export const checkIfChampionIsValid = (champion: ChampionsTypes.Champion) => {
     expect(Object.keys(champion).sort()).toEqual(
         [
             "id",
@@ -28,7 +53,9 @@ export const checkIfChampionIsValid = (champion) => {
     );
 };
 
-export const checkIfChampionRotationIsValid = (champRotation) => {
+export const checkIfChampionRotationIsValid = (
+    champRotation: ChampionRotationTypes.ChampionRotationAPIResponse
+) => {
     expect(Object.keys(champRotation).sort()).toEqual(
         [
             "freeChampionIds",
@@ -38,7 +65,9 @@ export const checkIfChampionRotationIsValid = (champRotation) => {
     );
 };
 
-export const checkIfChampionMasteryIsValid = (champMastery) => {
+export const checkIfChampionMasteryIsValid = (
+    champMastery: ChampionMasteryTypes.ChampionMasteryAPIResponse
+) => {
     expect(Object.keys(champMastery).sort()).toEqual(
         [
             "championPointsUntilNextLevel",
@@ -54,10 +83,10 @@ export const checkIfChampionMasteryIsValid = (champMastery) => {
     );
 };
 
-export const checkIfValidSummoner = (summ) => {
-    const summData = summ.data;
-    expect(summData.name).toEqual("Priciiix");
-    expect(Object.keys(summData).sort()).toEqual(
+export const checkIfValidSummoner = (
+    summoner: SummonerTypes.SummonerAPIResponse
+) => {
+    expect(Object.keys(summoner).sort()).toEqual(
         [
             "id",
             "accountId",
