@@ -118,6 +118,10 @@ export namespace ChampionsTypes {
             method: "GET",
             repertory: "/cdn/:version/data/:locale/champion/:championName.json",
         },
+        getByChampionID: {
+            method: "GET",
+            repertory: "/cdn/:version/data/:locale/champion.json",
+        },
     };
 
     export type DTO = {
@@ -130,5 +134,6 @@ export namespace ChampionsTypes {
             version?: VersionsTypes.GameVersion,
             locale?: Locale
         ): Promise<ChampionClass>;
+        getByChampionID(championID, version?, locale?): Promise<ChampionClass>;
     };
 }

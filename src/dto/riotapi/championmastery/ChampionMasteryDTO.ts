@@ -1,10 +1,10 @@
 import ChampionMastery from "./ChampionMastery";
-import { ChampionMasteryTypes } from "../../../types/dto/riotapi/championmastery/championmasterydto";
+import { ChampionMasteryTypes } from "../../../types/dto/riotapi/championmastery/ChampionMasteryDTO";
 import { ChampionsTypes } from "../../../types/dto/ddragon/champions";
 import DTO from "../DTO";
 import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
-import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerdto";
+import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 
 class ChampionMasteryDTO extends DTO implements ChampionMasteryTypes.DTO {
     constructor(api: RiotAPI) {

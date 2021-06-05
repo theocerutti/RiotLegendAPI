@@ -1,3 +1,37 @@
+export const checkIfChampionIsValid = (champion) => {
+    expect(Object.keys(champion).sort()).toEqual(
+        [
+            "id",
+            "key",
+            "name",
+            "title",
+            "image",
+            "skins",
+            "lore",
+            "blurb",
+            "allytips",
+            "enemytips",
+            "tags",
+            "partype",
+            "info",
+            "stats",
+            "spells",
+            "passive",
+            "recommended",
+        ].sort()
+    );
+};
+
+export const checkIfChampionRotationIsValid = (champRotation) => {
+    expect(Object.keys(champRotation).sort()).toEqual(
+        [
+            "freeChampionIds",
+            "freeChampionIdsForNewPlayers",
+            "maxNewPlayerLevel",
+        ].sort()
+    );
+};
+
 export const checkIfChampionMasteryIsValid = (champMastery) => {
     expect(Object.keys(champMastery).sort()).toEqual(
         [

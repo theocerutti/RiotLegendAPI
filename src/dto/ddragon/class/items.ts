@@ -2,7 +2,7 @@ import { ItemsTypes } from "../../../types/dto/ddragon/items";
 
 // TODO: interpreting items texts + add layer to get datas with ease
 class Items {
-    readonly items: ItemsTypes.APIResponse;
+    private readonly items: ItemsTypes.APIResponse;
 
     constructor(items: ItemsTypes.APIResponse) {
         this.items = items;

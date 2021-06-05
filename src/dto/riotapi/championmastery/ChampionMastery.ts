@@ -1,10 +1,10 @@
 import ChampionMasteryToSummonerRelation from "./relations/ChampionMasteryToSummonerRelation";
-import { ChampionMasteryTypes } from "../../../types/dto/riotapi/championmastery/championmasterydto";
+import { ChampionMasteryTypes } from "../../../types/dto/riotapi/championmastery/ChampionMasteryDTO";
 import { ChampionsTypes } from "../../../types/dto/ddragon/champions";
 import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import RiotBaseModel from "../RiotBaseModel";
-import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerdto";
+import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 import { UtilsTypes } from "../../../types/utils";
 
 class ChampionMastery extends RiotBaseModel {

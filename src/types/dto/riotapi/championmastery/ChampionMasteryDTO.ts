@@ -2,7 +2,7 @@ import ChampionMasteryClass from "../../../../dto/riotapi/championmastery/Champi
 import { ChampionsTypes } from "../../ddragon/champions";
 import { DTOEndpoint } from "../../dto";
 import { RegionName } from "../../../endpoints";
-import { SummonerTypes } from "../summoner/summonerdto";
+import { SummonerTypes } from "../summoner/summonerDTO";
 import { UtilsTypes } from "../../../utils";
 
 export namespace ChampionMasteryTypes {

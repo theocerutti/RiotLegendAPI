@@ -2,9 +2,9 @@ import ProfileIcon from "./profileicon";
 import { ProfileIconsTypes } from "../../../types/dto/ddragon/profileicons";
 
 class ProfileIcons {
-    readonly profileIconsRawData: ProfileIconsTypes.APIResponse;
+    private readonly profileIconsRawData: ProfileIconsTypes.APIResponse;
 
-    readonly profileIcons: Array<ProfileIcon> = [];
+    private readonly profileIcons: Array<ProfileIcon> = [];
 
     constructor(profileIcons: ProfileIconsTypes.APIResponse) {
         this.profileIconsRawData = profileIcons;

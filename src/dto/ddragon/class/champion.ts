@@ -3,9 +3,9 @@ import { DDRAGON_API_URL } from "../../../constants/constants";
 
 // TODO: interpreting spell texts + add layer to get datas with ease
 class Champion {
-    readonly metadataChampion: ChampionsTypes.APIResponseHeader;
+    private readonly metadataChampion: ChampionsTypes.APIResponseHeader;
 
-    readonly dataChampion: ChampionsTypes.Champion;
+    private readonly dataChampion: ChampionsTypes.Champion;
 
     constructor(
         championRes: ChampionsTypes.Champion,

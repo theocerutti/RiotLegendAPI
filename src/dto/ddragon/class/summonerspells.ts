@@ -2,7 +2,7 @@ import { SummonerSpellsTypes } from "../../../types/dto/ddragon/sumonnerspells";
 
 // TODO: interpreting spell texts + add layer to get datas with ease
 class SummonerSpells {
-    readonly dataSummonerSpell: SummonerSpellsTypes.APIResponse;
+    private readonly dataSummonerSpell: SummonerSpellsTypes.APIResponse;
 
     constructor(summonerSpell: SummonerSpellsTypes.APIResponse) {
         this.dataSummonerSpell = summonerSpell;

@@ -8,6 +8,7 @@ import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
 import CachedAPI from "./CachedAPI";
 import ChampionMasteryDTO from "../dto/riotapi/championmastery/ChampionMasteryDTO";
+import ChampionRotationDTO from "../dto/riotapi/championrotation/ChampionRotationDTO";
 import DDragonAPI from "./DDragonAPI";
 import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
@@ -29,6 +30,8 @@ class RiotAPI extends CachedAPI {
 
     private readonly championMasteryDTO: ChampionMasteryDTO;
 
+    private readonly championRotationDTO: ChampionRotationDTO;
+
     constructor(config: RiotAPIConfig) {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
@@ -43,6 +46,7 @@ class RiotAPI extends CachedAPI {
         // DTOs
         this.summonerDTO = new SummonerDTO(this);
         this.championMasteryDTO = new ChampionMasteryDTO(this);
+        this.championRotationDTO = new ChampionRotationDTO(this);
     }
 
     get dDragon(): DDragonAPI {
@@ -78,6 +82,10 @@ class RiotAPI extends CachedAPI {
 
     get championMastery(): ChampionMasteryDTO {
         return this.championMasteryDTO;
+    }
+
+    get championRotation(): ChampionRotationDTO {
+        return this.championRotationDTO;
     }
 
     // UTILS

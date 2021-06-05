@@ -2,7 +2,7 @@ import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import RiotBaseModel from "../RiotBaseModel";
 import SummonerToChampionMasteryDTORelation from "./relations/SummonerToChampionMasteryDTORelation";
-import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerdto";
+import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 
 class Summoner extends RiotBaseModel {
     private readonly championMasteryRelation: SummonerToChampionMasteryDTORelation;

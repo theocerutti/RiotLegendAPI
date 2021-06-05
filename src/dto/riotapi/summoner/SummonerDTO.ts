@@ -3,7 +3,7 @@ import DTO from "../DTO";
 import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import Summoner from "./Summoner";
-import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerdto";
+import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 
 class SummonerDTO extends DTO implements SummonerTypes.DTO {
     constructor(api: RiotAPI) {
