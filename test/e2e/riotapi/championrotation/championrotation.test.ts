@@ -11,14 +11,14 @@ const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 describe("RiotAPI", () => {
     describe("ChampionRotation", () => {
         let api: RiotAPI = null;
+        let rotations: ChampionRotation = null;
 
         beforeAll(async () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
+            rotations = await api.championRotation.getChampionRotations();
         });
 
         test("getFreeRotations", async () => {
-            const rotations = await api.championRotation.getChampionRotations();
-            expect(rotations).toBeInstanceOf(ChampionRotation);
             checkIfChampionRotationIsValid(rotations.data);
             const allChamps = await rotations.champions.getFreeRotations();
             expect(allChamps).toBeInstanceOf(Array);
@@ -28,9 +28,6 @@ describe("RiotAPI", () => {
         });
 
         test("getFreeRotationsFreePlayer", async () => {
-            const rotations = await api.championRotation.getChampionRotations();
-            expect(rotations).toBeInstanceOf(ChampionRotation);
-            checkIfChampionRotationIsValid(rotations.data);
             const allChamps =
                 await rotations.champions.getFreeRotationsFreePlayer();
             expect(allChamps).toBeInstanceOf(Array);

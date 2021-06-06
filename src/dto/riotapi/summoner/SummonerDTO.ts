@@ -24,7 +24,10 @@ class SummonerDTO extends DTO implements SummonerTypes.DTO {
         return new Summoner(this.api, reqRegion, summoner);
     }
 
-    async getByName(name: SummonerTypes.Name, region?: RegionName) {
+    async getByName(
+        name: SummonerTypes.Name,
+        region?: RegionName
+    ): Promise<Summoner> {
         const reqRegion = region || this.api.regionFallback.region;
         const summoner: SummonerTypes.SummonerAPIResponse =
             await this.api.riotRequest(
@@ -35,7 +38,10 @@ class SummonerDTO extends DTO implements SummonerTypes.DTO {
         return new Summoner(this.api, reqRegion, summoner);
     }
 
-    async getByPUUID(puuid: SummonerTypes.PUUID, region?: RegionName) {
+    async getByPUUID(
+        puuid: SummonerTypes.PUUID,
+        region?: RegionName
+    ): Promise<Summoner> {
         const reqRegion = region || this.api.regionFallback.region;
         const summoner: SummonerTypes.SummonerAPIResponse =
             await this.api.riotRequest(
@@ -46,7 +52,10 @@ class SummonerDTO extends DTO implements SummonerTypes.DTO {
         return new Summoner(this.api, reqRegion, summoner);
     }
 
-    async getByID(id: SummonerTypes.ID, region?: RegionName) {
+    async getByID(
+        id: SummonerTypes.ID,
+        region?: RegionName
+    ): Promise<Summoner> {
         const reqRegion = region || this.api.regionFallback.region;
         const summoner: SummonerTypes.SummonerAPIResponse =
             await this.api.riotRequest(
@@ -57,7 +66,10 @@ class SummonerDTO extends DTO implements SummonerTypes.DTO {
         return new Summoner(this.api, reqRegion, summoner);
     }
 
-    async getMe(accessToken: AccessToken, region?: RegionName) {
+    async getMe(
+        accessToken: AccessToken,
+        region?: RegionName
+    ): Promise<Summoner> {
         const reqRegion = region || this.api.regionFallback.region;
         const summoner: SummonerTypes.SummonerAPIResponse =
             await this.api.riotRequest(

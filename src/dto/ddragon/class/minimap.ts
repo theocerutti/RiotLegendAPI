@@ -15,7 +15,7 @@ class Minimap {
         this.version = version;
     }
 
-    get url() {
+    get url(): string {
         return `${DDRAGON_API_URL}/cdn/${this.version}/img/map/map${this.minimapData.mapId}.png`;
     }
 

@@ -2,10 +2,13 @@ import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import RiotBaseModel from "../RiotBaseModel";
 import SummonerToChampionMasteryDTORelation from "./relations/SummonerToChampionMasteryDTORelation";
+import SummonerToProfileIconDTORelation from "./relations/SummonerToProfileIconDTORelation";
 import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 
 class Summoner extends RiotBaseModel<SummonerTypes.SummonerAPIResponse> {
     private readonly championMasteryRelation: SummonerToChampionMasteryDTORelation;
+
+    private readonly profileIconRelation: SummonerToProfileIconDTORelation;
 
     constructor(
         api: RiotAPI,
@@ -17,6 +20,10 @@ class Summoner extends RiotBaseModel<SummonerTypes.SummonerAPIResponse> {
             api,
             this
         );
+        this.profileIconRelation = new SummonerToProfileIconDTORelation(
+            api,
+            this
+        );
     }
 
     // link relations
@@ -25,7 +32,9 @@ class Summoner extends RiotBaseModel<SummonerTypes.SummonerAPIResponse> {
         return this.championMasteryRelation;
     }
 
-    // TODO: getProfileIcon
+    get profileIcon(): SummonerToProfileIconDTORelation {
+        return this.profileIconRelation;
+    }
 }
 
 export default Summoner;

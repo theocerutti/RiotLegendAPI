@@ -1,20 +1,20 @@
 import { DTOEndpoint } from "../dto";
 import { Image } from "./image";
 import { Locale } from "../../ddragon";
-import ProfileIcons from "../../../dto/ddragon/class/profileicons";
+import ProfileIcons from "../../../dto/ddragon/profileIcon/profileIcons";
 import { VersionTypes } from "./version/versionDTO";
 
-export namespace ProfileIconsTypes {
+export namespace ProfileIconTypes {
     export type APIResponseHeader = {
         type: string;
         version: VersionTypes.GameVersion;
     };
 
     export type APIResponse = {
-        data: { [key: string]: ProfileImage };
+        data: { [key: string]: ProfileIcon };
     } & APIResponseHeader;
 
-    export type ProfileImage = {
+    export type ProfileIcon = {
         id: number;
         image: Image;
     };

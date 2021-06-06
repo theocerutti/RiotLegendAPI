@@ -1,9 +1,10 @@
 import DDragonAPI from "../../../src/api/DDragonAPI";
+import { VersionTypes } from "../../../src/types/dto/ddragon/version/versionDTO";
 
 describe("DDragonAPI", () => {
     describe("Versions", () => {
-        let api = null;
-        let versions = null;
+        let api: DDragonAPI = null;
+        let versions: VersionTypes.GameVersions = null;
 
         beforeAll(async () => {
             api = new DDragonAPI();

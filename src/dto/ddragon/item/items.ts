@@ -28,6 +28,12 @@ class Items extends DDragonBaseModel<ItemTypes.APIResponse> {
         );
     }
 
+    getAll(): Array<Item> {
+        return Object.keys(this.data.data).map((itemID) =>
+            this.getByID(itemID)
+        );
+    }
+
     getByName(name: string): Item | null {
         const filteredItems = Object.values(this.data.data).filter(
             (it) => it.name === name

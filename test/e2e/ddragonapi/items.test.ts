@@ -17,6 +17,13 @@ describe("DDragonAPI", () => {
             checkIfItemsIsValid(items.data);
         });
 
+        test("getAll", async () => {
+            const allItems = items.getAll();
+            expect(allItems).toBeInstanceOf(Array);
+            const firstItem = allItems[0];
+            checkIfItemIsValid(firstItem.data);
+        });
+
         test("get item by ID", async () => {
             const itemID = "1001";
             const item = items.getByID(itemID);

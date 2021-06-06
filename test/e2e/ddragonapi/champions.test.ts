@@ -9,9 +9,9 @@ import DDragonAPI from "../../../src/api/DDragonAPI";
 
 describe("DDragonAPI", () => {
     describe("Champions", () => {
-        let api = null;
-        let champions = null;
-        let zyraChampion = null;
+        let api: DDragonAPI = null;
+        let champions: Array<ChampionShard> = null;
+        let zyraChampion: Champion = null;
 
         beforeAll(async () => {
             api = new DDragonAPI();

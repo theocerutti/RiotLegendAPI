@@ -5,8 +5,8 @@ import { isURL } from "../../utils";
 
 describe("DDragonAPI", () => {
     describe("Minimaps", () => {
-        let api = null;
-        let minimaps = null;
+        let api: DDragonAPI = null;
+        let minimaps: Minimaps = null;
 
         beforeAll(async () => {
             api = new DDragonAPI();

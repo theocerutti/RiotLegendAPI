@@ -9,13 +9,12 @@ import ChampionDTO from "../dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../constants/constants";
 import ItemDTO from "../dto/ddragon/item/itemDTO";
 import { MinimapTypes } from "../types/dto/ddragon/minimaps";
-import { ProfileIconsTypes } from "../types/dto/ddragon/profileicons";
+import ProfileIconDTO from "../dto/ddragon/profileIcon/profileIconDTO";
 import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
 import VersionDTO from "../dto/ddragon/version/versionDTO";
 import { compile } from "path-to-regexp";
 import { getMinimapsDTO } from "../dto/ddragon/minimaps";
-import { getProfileIconsDTO } from "../dto/ddragon/profileicons";
 import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
 
 export const DEFAULT_REALM_FALLBACK: Realm = "euw";
@@ -32,6 +31,8 @@ class DDragonAPI extends CachedAPI {
 
     private readonly itemDTO: ItemDTO;
 
+    private readonly profileIconDTO: ProfileIconDTO;
+
     constructor(config?: ConfigDDragonAPI) {
         super(config?.cache);
         this.apiConfig = config;
@@ -43,6 +44,7 @@ class DDragonAPI extends CachedAPI {
         this.championDTO = new ChampionDTO(this);
         this.versionDTO = new VersionDTO(this);
         this.itemDTO = new ItemDTO(this);
+        this.profileIconDTO = new ProfileIconDTO(this);
     }
 
     get config(): ConfigDDragonAPI {
@@ -65,8 +67,8 @@ class DDragonAPI extends CachedAPI {
         return this.itemDTO;
     }
 
-    get profileIcons(): ProfileIconsTypes.DTO {
-        return getProfileIconsDTO(this);
+    get profileIcons(): ProfileIconDTO {
+        return this.profileIconDTO;
     }
 
     get minimaps(): MinimapTypes.DTO {

@@ -3,8 +3,8 @@ import SummonerSpells from "../../../src/dto/ddragon/class/summonerspells";
 
 describe("DDragonAPI", () => {
     describe("SummonerSpells", () => {
-        let api = null;
-        let summonerSpells = null;
+        let api: DDragonAPI = null;
+        let summonerSpells: SummonerSpells = null;
 
         beforeAll(async () => {
             api = new DDragonAPI();

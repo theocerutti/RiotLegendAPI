@@ -1,14 +1,29 @@
-import { ItemTypes } from "../../src/types/dto/ddragon/item/itemDTO";
 import { APIStatusTypes } from "../../src/types/dto/riotapi/apistatus/APIStatusDTO";
 import { ChampionMasteryTypes } from "../../src/types/dto/riotapi/championmastery/ChampionMasteryDTO";
 import { ChampionRotationTypes } from "../../src/types/dto/riotapi/championrotation/ChampionRotationDTO";
 import { ChampionTypes } from "../../src/types/dto/ddragon/champion/championDTO";
+import { ItemTypes } from "../../src/types/dto/ddragon/item/itemDTO";
 import { MatchTypes } from "../../src/types/dto/riotapi/match/MatchDTO";
+import { ProfileIconTypes } from "../../src/types/dto/ddragon/profileicons";
 import { SummonerTypes } from "../../src/types/dto/riotapi/summoner/summonerDTO";
 
 export const DEFAULT_SUMMONER_NAME = "Priciiix";
 export const DEFAULT_REGION_NAME = "euw1";
 export const DEFAULT_PLATFORM_NAME = "europe";
+
+export const checkIfProfileIconsIsValid = (
+    profileIcons: ProfileIconTypes.APIResponse
+) => {
+    expect(Object.keys(profileIcons).sort()).toEqual(
+        ["type", "version", "data"].sort()
+    );
+};
+
+export const checkIfProfileIconIsValid = (
+    profileIcon: ProfileIconTypes.ProfileIcon
+) => {
+    expect(Object.keys(profileIcon).sort()).toEqual(["id", "image"].sort());
+};
 
 export const checkIfItemsIsValid = (items: ItemTypes.APIResponse) => {
     expect(Object.keys(items).sort()).toEqual(
