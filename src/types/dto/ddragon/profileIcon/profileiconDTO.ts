@@ -1,8 +1,8 @@
-import { DTOEndpoint } from "../dto";
-import { Image } from "./image";
-import { Locale } from "../../ddragon";
-import ProfileIcons from "../../../dto/ddragon/profileIcon/profileIcons";
-import { VersionTypes } from "./version/versionDTO";
+import { DTOEndpoint } from "../../dto";
+import { Image } from "../image";
+import { Locale } from "../../../ddragon";
+import ProfileIcons from "../../../../dto/ddragon/profileIcon/profileIcons";
+import { VersionTypes } from "../version/versionDTO";
 
 export namespace ProfileIconTypes {
     export type APIResponseHeader = {

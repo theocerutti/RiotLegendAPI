@@ -1,5 +1,6 @@
 import DDragonAPI from "../../../src/api/DDragonAPI";
-import SummonerSpells from "../../../src/dto/ddragon/class/summonerspells";
+import SummonerSpells from "../../../src/dto/ddragon/summonerSpell/summonerspells";
+import { checkIfSummonerSpellIsValid } from "../../utils";
 
 describe("DDragonAPI", () => {
     describe("SummonerSpells", () => {
@@ -13,9 +14,7 @@ describe("DDragonAPI", () => {
 
         test("get all summoner spells", async () => {
             expect(summonerSpells).toBeInstanceOf(SummonerSpells);
-            expect(Object.keys(summonerSpells.metadata).sort()).toEqual(
-                ["type", "version"].sort()
-            );
+            checkIfSummonerSpellIsValid(summonerSpells.data);
         });
 
         test("get summoner spell by ID", async () => {

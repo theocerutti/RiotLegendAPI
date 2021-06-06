@@ -4,12 +4,21 @@ import { ChampionRotationTypes } from "../../src/types/dto/riotapi/championrotat
 import { ChampionTypes } from "../../src/types/dto/ddragon/champion/championDTO";
 import { ItemTypes } from "../../src/types/dto/ddragon/item/itemDTO";
 import { MatchTypes } from "../../src/types/dto/riotapi/match/MatchDTO";
-import { ProfileIconTypes } from "../../src/types/dto/ddragon/profileicons";
+import { ProfileIconTypes } from "../../src/types/dto/ddragon/profileIcon/profileiconDTO";
+import { SummonerSpellsTypes } from "../../src/types/dto/ddragon/summonerSpell/sumonnerspellDTO";
 import { SummonerTypes } from "../../src/types/dto/riotapi/summoner/summonerDTO";
 
 export const DEFAULT_SUMMONER_NAME = "Priciiix";
 export const DEFAULT_REGION_NAME = "euw1";
 export const DEFAULT_PLATFORM_NAME = "europe";
+
+export const checkIfSummonerSpellIsValid = (
+    summonerSpell: SummonerSpellsTypes.APIResponse
+) => {
+    expect(Object.keys(summonerSpell).sort()).toEqual(
+        ["data", "type", "version"].sort()
+    );
+};
 
 export const checkIfProfileIconsIsValid = (
     profileIcons: ProfileIconTypes.APIResponse

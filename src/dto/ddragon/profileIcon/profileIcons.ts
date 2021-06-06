@@ -2,7 +2,7 @@ import DDragonAPI from "../../../api/DDragonAPI";
 import DDragonBaseModel from "../DDragonBaseModel";
 import { Locale } from "../../../types/ddragon";
 import ProfileIcon from "./profileIcon";
-import { ProfileIconTypes } from "../../../types/dto/ddragon/profileicons";
+import { ProfileIconTypes } from "../../../types/dto/ddragon/profileIcon/profileiconDTO";
 import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class ProfileIcons extends DDragonBaseModel<ProfileIconTypes.APIResponse> {
@@ -19,6 +19,10 @@ class ProfileIcons extends DDragonBaseModel<ProfileIconTypes.APIResponse> {
         let iconId = id;
 
         if (typeof id === "string") iconId = parseInt(id, 10);
+        const isIdValid = Object.keys(this.data.data).some(
+            (profileIconId) => profileIconId === iconId
+        );
+        if (!isIdValid) return null;
         return new ProfileIcon(
             this.api,
             this.locale,

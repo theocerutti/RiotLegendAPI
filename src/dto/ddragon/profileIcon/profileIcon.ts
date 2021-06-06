@@ -2,7 +2,7 @@ import { DDRAGON_API_URL } from "../../../constants/constants";
 import DDragonAPI from "../../../api/DDragonAPI";
 import DDragonBaseModel from "../DDragonBaseModel";
 import { Locale } from "../../../types/ddragon";
-import { ProfileIconTypes } from "../../../types/dto/ddragon/profileicons";
+import { ProfileIconTypes } from "../../../types/dto/ddragon/profileIcon/profileiconDTO";
 import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class ProfileIcon extends DDragonBaseModel<ProfileIconTypes.ProfileIcon> {

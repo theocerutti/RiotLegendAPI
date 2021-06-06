@@ -1,6 +1,6 @@
 import DDragonAPI from "../../../api/DDragonAPI";
 import DTO from "../DTO";
-import { ProfileIconTypes } from "../../../types/dto/ddragon/profileicons";
+import { ProfileIconTypes } from "../../../types/dto/ddragon/profileIcon/profileiconDTO";
 import ProfileIcons from "./profileIcons";
 
 class ProfileIconDTO extends DTO implements ProfileIconTypes.DTO {
