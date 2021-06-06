@@ -2,12 +2,12 @@ import { DTOEndpoint } from "../dto";
 import { Image } from "./image";
 import { Locale } from "../../ddragon";
 import SummonerSpellsClass from "../../../dto/ddragon/class/summonerspells";
-import { VersionsTypes } from "./versions";
+import { VersionTypes } from "./versions";
 
 export namespace SummonerSpellsTypes {
     export type APIResponseHeader = {
         type: string;
-        version: VersionsTypes.GameVersion;
+        version: VersionTypes.GameVersion;
     };
 
     export type APIResponse = {
@@ -50,7 +50,7 @@ export namespace SummonerSpellsTypes {
 
     export type DTO = {
         all(
-            version?: VersionsTypes.GameVersion,
+            version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<SummonerSpellsClass>;
     };

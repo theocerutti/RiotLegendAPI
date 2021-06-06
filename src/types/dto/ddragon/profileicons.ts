@@ -2,12 +2,12 @@ import { DTOEndpoint } from "../dto";
 import { Image } from "./image";
 import { Locale } from "../../ddragon";
 import ProfileIcons from "../../../dto/ddragon/class/profileicons";
-import { VersionsTypes } from "./versions";
+import { VersionTypes } from "./versions";
 
 export namespace ProfileIconsTypes {
     export type APIResponseHeader = {
         type: string;
-        version: VersionsTypes.GameVersion;
+        version: VersionTypes.GameVersion;
     };
 
     export type APIResponse = {
@@ -28,7 +28,7 @@ export namespace ProfileIconsTypes {
 
     export type DTO = {
         all(
-            version?: VersionsTypes.GameVersion,
+            version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<ProfileIcons>;
     };

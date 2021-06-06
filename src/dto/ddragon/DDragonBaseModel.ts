@@ -1,11 +1,11 @@
 import DDragonAPI from "../../api/DDragonAPI";
 import { Locale } from "../../types/ddragon";
-import { VersionsTypes } from "../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../types/dto/ddragon/versions";
 
 class DDragonBaseModel<T> {
     protected readonly api: DDragonAPI;
 
-    private readonly associatedVersion: VersionsTypes.GameVersion;
+    private readonly associatedVersion: VersionTypes.GameVersion;
 
     private readonly associatedLocale: Locale;
 
@@ -14,7 +14,7 @@ class DDragonBaseModel<T> {
     constructor(
         api: DDragonAPI,
         locale: Locale,
-        version: VersionsTypes.GameVersion,
+        version: VersionTypes.GameVersion,
         data: T
     ) {
         this.api = api;
@@ -23,7 +23,7 @@ class DDragonBaseModel<T> {
         this.apiData = data;
     }
 
-    public get version(): VersionsTypes.GameVersion {
+    public get version(): VersionTypes.GameVersion {
         return this.associatedVersion;
     }
 

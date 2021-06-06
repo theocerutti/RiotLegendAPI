@@ -3,7 +3,7 @@ import { ChampionTypes } from "../../../types/dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../../../constants/constants";
 import DDragonAPI from "../../../api/DDragonAPI";
 import { Locale } from "../../../types/ddragon";
-import { VersionsTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/versions";
 
 // TODO: interpreting spell texts + add layer to get datas with ease
 class Champion extends ChampionBase {
@@ -12,7 +12,7 @@ class Champion extends ChampionBase {
     constructor(
         api: DDragonAPI,
         locale: Locale,
-        version: VersionsTypes.GameVersion,
+        version: VersionTypes.GameVersion,
         championRes: ChampionTypes.Champion
     ) {
         super(api, locale, version, championRes);

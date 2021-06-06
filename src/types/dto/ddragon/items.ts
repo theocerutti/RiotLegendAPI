@@ -2,12 +2,12 @@ import { DTOEndpoint } from "../dto";
 import { Image } from "./image";
 import ItemsClass from "../../../dto/ddragon/class/items";
 import { Locale } from "../../ddragon";
-import { VersionsTypes } from "./versions";
+import { VersionTypes } from "./versions";
 
 export namespace ItemsTypes {
     export type APIResponseHeader = {
         type: string;
-        version: VersionsTypes.GameVersion;
+        version: VersionTypes.GameVersion;
         basic: {
             name: string;
             rune: {
@@ -160,7 +160,7 @@ export namespace ItemsTypes {
 
     export type DTO = {
         all(
-            version?: VersionsTypes.GameVersion,
+            version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<ItemsClass>;
     };

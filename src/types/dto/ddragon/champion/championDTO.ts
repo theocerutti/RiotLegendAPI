@@ -3,13 +3,13 @@ import ChampionShardClass from "../../../../dto/ddragon/champion/championShard";
 import { DTOEndpoint } from "../../dto";
 import { Image } from "../image";
 import { Locale } from "../../../ddragon";
-import { VersionsTypes } from "../versions";
+import { VersionTypes } from "../versions";
 
 export namespace ChampionTypes {
     export type APIResponseHeader = {
         type: string;
         format: string;
-        version: VersionsTypes.GameVersion;
+        version: VersionTypes.GameVersion;
     };
 
     export type APIResponseShardChampion = {
@@ -106,7 +106,7 @@ export namespace ChampionTypes {
     } & ChampionBase;
 
     export type ChampionShard = {
-        version: VersionsTypes.GameVersion;
+        version: VersionTypes.GameVersion;
     } & ChampionBase;
 
     export type ChampionBase = {
@@ -139,12 +139,12 @@ export namespace ChampionTypes {
 
     export interface DTO {
         all(
-            version?: VersionsTypes.GameVersion,
+            version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<Array<ChampionShardClass>>;
         getByChampionName(
             championName: string,
-            version?: VersionsTypes.GameVersion,
+            version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<ChampionClass>;
         getByChampionID(

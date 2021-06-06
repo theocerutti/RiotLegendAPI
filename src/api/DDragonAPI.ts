@@ -12,13 +12,12 @@ import { MinimapTypes } from "../types/dto/ddragon/minimaps";
 import { ProfileIconsTypes } from "../types/dto/ddragon/profileicons";
 import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
-import { VersionsTypes } from "../types/dto/ddragon/versions";
+import VersionDTO from "../dto/ddragon/version/versionDTO";
 import { compile } from "path-to-regexp";
 import { getItemsDTO } from "../dto/ddragon/items";
 import { getMinimapsDTO } from "../dto/ddragon/minimaps";
 import { getProfileIconsDTO } from "../dto/ddragon/profileicons";
 import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
-import { getVersionsDTO } from "../dto/ddragon/versions";
 
 export const DEFAULT_REALM_FALLBACK: Realm = "euw";
 export const DEFAULT_LOCALE_FALLBACK: Locale = "en_GB";
@@ -30,6 +29,8 @@ class DDragonAPI extends CachedAPI {
 
     private readonly championDTO: ChampionDTO;
 
+    private readonly versionDTO: VersionDTO;
+
     constructor(config?: ConfigDDragonAPI) {
         super(config?.cache);
         this.apiConfig = config;
@@ -39,14 +40,15 @@ class DDragonAPI extends CachedAPI {
         };
 
         this.championDTO = new ChampionDTO(this);
-    }
-
-    get versions(): VersionsTypes.DTO {
-        return getVersionsDTO(this);
+        this.versionDTO = new VersionDTO(this);
     }
 
     get config(): ConfigDDragonAPI {
         return this.apiConfig;
+    }
+
+    get versions(): VersionDTO {
+        return this.versionDTO;
     }
 
     get champions(): ChampionDTO {

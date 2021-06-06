@@ -1,15 +1,15 @@
 import { DDRAGON_API_URL } from "../../../constants/constants";
 import { ProfileIconsTypes } from "../../../types/dto/ddragon/profileicons";
-import { VersionsTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/versions";
 
 class ProfileIcon {
     private readonly image: ProfileIconsTypes.ProfileImage;
 
-    private readonly version: VersionsTypes.GameVersion;
+    private readonly version: VersionTypes.GameVersion;
 
     constructor(
         profileIcon: ProfileIconsTypes.ProfileImage,
-        version: VersionsTypes.GameVersion
+        version: VersionTypes.GameVersion
     ) {
         this.image = profileIcon;
         this.version = version;

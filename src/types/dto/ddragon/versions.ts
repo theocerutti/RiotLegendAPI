@@ -1,6 +1,6 @@
 import { DTOEndpoint } from "../dto";
 
-export namespace VersionsTypes {
+export namespace VersionTypes {
     export type GameVersion = string;
     export type GameVersions = Array<GameVersion>;
     export const RestEndpoint: DTOEndpoint<DTO> = {

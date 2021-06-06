@@ -9,13 +9,15 @@ export const RIOT_TOKEN_HEADER = "X-Riot-Token";
 
 // 20req per 1second
 // 100req per 2minutes
+// Add delay for security
 export const BOTTLENECK_LIMITER_DEFAULT_OPTIONS: Bottleneck.ConstructorOptions =
     {
-        reservoir: 100,
-        reservoirRefreshAmount: 100,
-        reservoirRefreshInterval: 60 * 1000 * 2,
+        reservoir: 100 /* 100req */ - 10 /* -10req for security */,
+        reservoirRefreshAmount: 100 /* 100req */ - 10 /* -10req for security */,
+        reservoirRefreshInterval:
+            60 * 1000 * 2 /* 120sec */ + /* 20sec for security */ 20 * 1000,
         maxConcurrent: 1,
-        minTime: 50,
+        minTime: 50 /* 20req per 1sec */ + 20 /* 20ms per req for security */,
     };
 
 export const clusterRegionMapper: {

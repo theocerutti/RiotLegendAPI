@@ -1,15 +1,15 @@
 import { DDRAGON_API_URL } from "../../../constants/constants";
 import { MinimapTypes } from "../../../types/dto/ddragon/minimaps";
-import { VersionsTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/versions";
 
 class Minimap {
     private readonly minimapData: MinimapTypes.Minimap;
 
-    private readonly version: VersionsTypes.GameVersion;
+    private readonly version: VersionTypes.GameVersion;
 
     constructor(
         minimapData: MinimapTypes.Minimap,
-        version: VersionsTypes.GameVersion
+        version: VersionTypes.GameVersion
     ) {
         this.minimapData = minimapData;
         this.version = version;

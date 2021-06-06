@@ -1,6 +1,6 @@
 import Minimap from "./minimap";
 import { MinimapTypes } from "../../../types/dto/ddragon/minimaps";
-import { VersionsTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/versions";
 
 class Minimaps {
     private readonly minimapsRawData: MinimapTypes.APIResponse;
@@ -9,7 +9,7 @@ class Minimaps {
 
     constructor(
         minimapsData: MinimapTypes.APIResponse,
-        version: VersionsTypes.GameVersion
+        version: VersionTypes.GameVersion
     ) {
         this.minimapsRawData = minimapsData;
         this.allMinimaps = this.minimapsRawData.map(
