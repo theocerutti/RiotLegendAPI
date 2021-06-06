@@ -1,6 +1,7 @@
-import Bottleneck from "bottleneck";
 import { MemoryCache, RedisCache } from "../cache/cache";
 import { RequestOptions, RestMethod } from "../types/api";
+import { BOTTLENECK_LIMITER_DEFAULT_OPTIONS } from "../constants/constants";
+import Bottleneck from "bottleneck";
 import { CacheConfig } from "../types/cachedapi";
 import Redis from "ioredis";
 import fetch from "node-fetch";
@@ -27,15 +28,9 @@ class CachedAPI {
             this.cache = new RedisCache(config.client as Redis.RedisOptions);
         }
 
-        this.requestLimiter = new Bottleneck({
-            reservoir: 100, // initial value
-            reservoirRefreshAmount: 100,
-            reservoirRefreshInterval: 60 * 1000 * 2, // 2minutes / must be divisible by 250
-
-            // also use maxConcurrent and/or minTime for safety
-            maxConcurrent: 1,
-            minTime: 50, // pick a value that makes sense for your use case
-        });
+        this.requestLimiter = new Bottleneck(
+            BOTTLENECK_LIMITER_DEFAULT_OPTIONS
+        );
     }
 
     public get getCacheConfig(): CacheConfig {

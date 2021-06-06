@@ -1,8 +1,8 @@
 import { ChampionsTypes } from "../../ddragon/champions";
+import { ClusterName } from "../../../endpoints";
 import { DTOEndpoint } from "../../dto";
 import MatchClass from "../../../../dto/riotapi/match/Match";
 import MatchTimeLineClass from "../../../../dto/riotapi/match/MatchTimeLine";
-import { ClusterName } from "../../../endpoints";
 import { SummonerTypes } from "../summoner/summonerDTO";
 import { UtilsTypes } from "../../../utils";
 
