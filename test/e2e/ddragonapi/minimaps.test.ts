@@ -1,7 +1,7 @@
+import { checkIfMinimapIsValid, isURL } from "../../utils";
 import DDragonAPI from "../../../src/api/DDragonAPI";
-import Minimap from "../../../src/dto/ddragon/class/minimap";
-import Minimaps from "../../../src/dto/ddragon/class/minimaps";
-import { isURL } from "../../utils";
+import Minimap from "../../../src/dto/ddragon/minimap/minimap";
+import Minimaps from "../../../src/dto/ddragon/minimap/minimaps";
 
 describe("DDragonAPI", () => {
     describe("Minimaps", () => {
@@ -19,9 +19,7 @@ describe("DDragonAPI", () => {
             expect(allMinimaps).toBeInstanceOf(Array);
             const firstMinimap = allMinimaps[0];
             expect(firstMinimap).toBeInstanceOf(Minimap);
-            expect(Object.keys(firstMinimap.data).sort()).toEqual(
-                ["mapId", "mapName", "notes"].sort()
-            );
+            checkIfMinimapIsValid(firstMinimap.data);
             expect(isURL(firstMinimap.url)).toBeTruthy();
         });
     });

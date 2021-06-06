@@ -26,10 +26,10 @@ export namespace ProfileIconTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         all(
             version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<ProfileIcons>;
-    };
+    }
 }

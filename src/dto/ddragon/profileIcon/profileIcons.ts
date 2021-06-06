@@ -18,7 +18,7 @@ class ProfileIcons extends DDragonBaseModel<ProfileIconTypes.APIResponse> {
     getByID(id: string | number): ProfileIcon | null {
         let iconId = id;
 
-        if (typeof id === "string") iconId = parseInt(id, 10);
+        if (typeof id === "number") iconId = id.toString();
         const isIdValid = Object.keys(this.data.data).some(
             (profileIconId) => profileIconId === iconId
         );

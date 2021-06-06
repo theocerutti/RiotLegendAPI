@@ -1,6 +1,6 @@
-import { DTOEndpoint } from "../dto";
-import Minimaps from "../../../dto/ddragon/class/minimaps";
-import { RIOT_STATIC_ASSETS_URL } from "../../../constants/constants";
+import { DTOEndpoint } from "../../dto";
+import Minimaps from "../../../../dto/ddragon/minimap/minimaps";
+import { RIOT_STATIC_ASSETS_URL } from "../../../../constants/constants";
 
 export namespace MinimapTypes {
     export type APIResponse = Array<Minimap>;
@@ -19,7 +19,7 @@ export namespace MinimapTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         all(): Promise<Minimaps>;
-    };
+    }
 }

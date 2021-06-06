@@ -8,13 +8,12 @@ import CachedAPI from "./CachedAPI";
 import ChampionDTO from "../dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../constants/constants";
 import ItemDTO from "../dto/ddragon/item/itemDTO";
-import { MinimapTypes } from "../types/dto/ddragon/minimaps";
+import MinimapDTO from "../dto/ddragon/minimap/minimapDTO";
 import ProfileIconDTO from "../dto/ddragon/profileIcon/profileIconDTO";
 import { RestEndpoint } from "../types/api";
 import SummonerSpellDTO from "../dto/ddragon/summonerSpell/summonerspellsDTO";
 import VersionDTO from "../dto/ddragon/version/versionDTO";
 import { compile } from "path-to-regexp";
-import { getMinimapsDTO } from "../dto/ddragon/minimaps";
 
 export const DEFAULT_REALM_FALLBACK: Realm = "euw";
 export const DEFAULT_LOCALE_FALLBACK: Locale = "en_GB";
@@ -34,6 +33,8 @@ class DDragonAPI extends CachedAPI {
 
     private readonly summonerSpellDTO: SummonerSpellDTO;
 
+    private readonly minimapDTO: MinimapDTO;
+
     constructor(config?: ConfigDDragonAPI) {
         super(config?.cache);
         this.apiConfig = config;
@@ -47,6 +48,7 @@ class DDragonAPI extends CachedAPI {
         this.itemDTO = new ItemDTO(this);
         this.profileIconDTO = new ProfileIconDTO(this);
         this.summonerSpellDTO = new SummonerSpellDTO(this);
+        this.minimapDTO = new MinimapDTO(this);
     }
 
     get config(): ConfigDDragonAPI {
@@ -73,8 +75,8 @@ class DDragonAPI extends CachedAPI {
         return this.profileIconDTO;
     }
 
-    get minimaps(): MinimapTypes.DTO {
-        return getMinimapsDTO(this);
+    get minimaps(): MinimapDTO {
+        return this.minimapDTO;
     }
 
     get regionFallback(): RegionFallback {

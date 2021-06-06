@@ -48,10 +48,10 @@ export namespace SummonerSpellsTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         all(
             version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<SummonerSpellsClass>;
-    };
+    }
 }
