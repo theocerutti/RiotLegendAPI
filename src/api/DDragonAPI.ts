@@ -5,7 +5,7 @@ import {
     RegionFallback,
 } from "../types/ddragon";
 import CachedAPI from "./CachedAPI";
-import { ChampionsTypes } from "../types/dto/ddragon/champions";
+import ChampionDTO from "../dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../constants/constants";
 import { ItemsTypes } from "../types/dto/ddragon/items";
 import { MinimapTypes } from "../types/dto/ddragon/minimaps";
@@ -14,7 +14,6 @@ import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
 import { VersionsTypes } from "../types/dto/ddragon/versions";
 import { compile } from "path-to-regexp";
-import { getChampionsDTO } from "../dto/ddragon/champions";
 import { getItemsDTO } from "../dto/ddragon/items";
 import { getMinimapsDTO } from "../dto/ddragon/minimaps";
 import { getProfileIconsDTO } from "../dto/ddragon/profileicons";
@@ -29,6 +28,8 @@ class DDragonAPI extends CachedAPI {
 
     readonly apiConfig: ConfigDDragonAPI;
 
+    private readonly championDTO: ChampionDTO;
+
     constructor(config?: ConfigDDragonAPI) {
         super(config?.cache);
         this.apiConfig = config;
@@ -36,6 +37,8 @@ class DDragonAPI extends CachedAPI {
             realm: DEFAULT_REALM_FALLBACK,
             locale: DEFAULT_LOCALE_FALLBACK,
         };
+
+        this.championDTO = new ChampionDTO(this);
     }
 
     get versions(): VersionsTypes.DTO {
@@ -46,8 +49,8 @@ class DDragonAPI extends CachedAPI {
         return this.apiConfig;
     }
 
-    get champions(): ChampionsTypes.DTO {
-        return getChampionsDTO(this);
+    get champions(): ChampionDTO {
+        return this.championDTO;
     }
 
     get summonerSpells(): SummonerSpellsTypes.DTO {

@@ -1,4 +1,4 @@
-import { ChampionsTypes } from "../../ddragon/champions";
+import { ChampionTypes } from "../../ddragon/champion/championDTO";
 import { ClusterName } from "../../../endpoints";
 import { DTOEndpoint } from "../../dto";
 import MatchClass from "../../../../dto/riotapi/match/Match";
@@ -46,8 +46,8 @@ export namespace MatchTypes {
         bountyLevel: number;
         champExperience: number;
         champLevel: number;
-        championId: ChampionsTypes.ChampionID;
-        championName: ChampionsTypes.Name;
+        championId: ChampionTypes.ChampionID;
+        championName: ChampionTypes.Name;
         championTransform: number;
         consumablesPurchased: number;
         damageDealtToBuildings: number;
@@ -272,7 +272,7 @@ export namespace MatchTypes {
             victimDamageDealt?: Array<{
                 basic: boolean;
                 magicDamage: number;
-                name: ChampionsTypes.Name;
+                name: ChampionTypes.Name;
                 participantId: ParticipantID;
                 physicalDamage: number;
                 spellName: string;
@@ -283,7 +283,7 @@ export namespace MatchTypes {
             victimDamageReceived?: Array<{
                 basic: boolean;
                 magicDamage: number;
-                name: ChampionsTypes.Name;
+                name: ChampionTypes.Name;
                 participantId: ParticipantID;
                 physicalDamage: number;
                 spellName: string;

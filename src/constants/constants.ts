@@ -1,5 +1,5 @@
-import Bottleneck from "bottleneck";
 import { ClusterName, Endpoint, RegionName } from "../types/endpoints";
+import Bottleneck from "bottleneck";
 
 export const DDRAGON_API_URL: Endpoint = "https://ddragon.leagueoflegends.com";
 export const RIOT_STATIC_ASSETS_URL: Endpoint =

@@ -1,17 +1,22 @@
-import ChampionClass from "../../../dto/ddragon/class/champion";
-import { DTOEndpoint } from "../dto";
-import { Image } from "./image";
-import { Locale } from "../../ddragon";
-import { VersionsTypes } from "./versions";
+import ChampionClass from "../../../../dto/ddragon/champion/champion";
+import ChampionShardClass from "../../../../dto/ddragon/champion/championShard";
+import { DTOEndpoint } from "../../dto";
+import { Image } from "../image";
+import { Locale } from "../../../ddragon";
+import { VersionsTypes } from "../versions";
 
-export namespace ChampionsTypes {
+export namespace ChampionTypes {
     export type APIResponseHeader = {
         type: string;
         format: string;
         version: VersionsTypes.GameVersion;
     };
 
-    export type APIResponse = {
+    export type APIResponseShardChampion = {
+        data: { [key: string]: ChampionShard };
+    } & APIResponseHeader;
+
+    export type APIResponseCompleteChampion = {
         data: { [key: string]: Champion };
     } & APIResponseHeader;
 
@@ -90,23 +95,31 @@ export namespace ChampionsTypes {
     export type ChampionID = string;
 
     export type Champion = {
+        skins: Array<Skin>;
+        lore: string;
+        allytips: Array<string>;
+        enemytips: Array<string>;
+        partype: string;
+        spells: Array<Spell>;
+        passive: Passive;
+        recommended: Array<any>;
+    } & ChampionBase;
+
+    export type ChampionShard = {
+        version: VersionsTypes.GameVersion;
+    } & ChampionBase;
+
+    export type ChampionBase = {
         id: ChampionID;
         key: string;
         name: string;
         title: string;
         image: Image;
-        skins: Array<Skin>;
-        lore: string;
         blurb: string;
-        allytips: Array<string>;
-        enemytips: Array<string>;
         tags: Array<string>;
         partype: string;
         info: Info;
         stats: Stats;
-        spells: Array<Spell>;
-        passive: Passive;
-        recommended: Array<any>;
     };
 
     export const RestEndpoint: DTOEndpoint<DTO> = {
@@ -124,16 +137,20 @@ export namespace ChampionsTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         all(
             version?: VersionsTypes.GameVersion,
             locale?: Locale
-        ): Promise<Array<ChampionClass>>;
+        ): Promise<Array<ChampionShardClass>>;
         getByChampionName(
             championName: string,
             version?: VersionsTypes.GameVersion,
             locale?: Locale
         ): Promise<ChampionClass>;
-        getByChampionID(championID, version?, locale?): Promise<ChampionClass>;
-    };
+        getByChampionID(
+            championID,
+            version?,
+            locale?
+        ): Promise<ChampionShardClass>;
+    }
 }

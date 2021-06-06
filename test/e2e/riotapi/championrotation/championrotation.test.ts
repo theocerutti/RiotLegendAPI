@@ -1,7 +1,10 @@
-import Champion from "../../../../src/dto/ddragon/class/champion";
+import {
+    checkIfChampionRotationIsValid,
+    checkIfChampionShardIsValid,
+} from "../../../utils";
 import ChampionRotation from "../../../../src/dto/riotapi/championrotation/ChampionRotation";
+import ChampionShard from "../../../../src/dto/ddragon/champion/championShard";
 import RiotAPI from "../../../../src";
-import { checkIfChampionRotationIsValid } from "../../../utils";
 
 const riotAPIKey = process.env.RIOT_API_KEY_LOL_TEST || "";
 
@@ -20,8 +23,8 @@ describe("RiotAPI", () => {
             const allChamps = await rotations.champions.getFreeRotations();
             expect(allChamps).toBeInstanceOf(Array);
             const firstChampRotation = allChamps[0];
-            // checkIfChampionIsValid(firstChampRotation.data); TODO: check it
-            expect(firstChampRotation).toBeInstanceOf(Champion);
+            expect(firstChampRotation).toBeInstanceOf(ChampionShard);
+            checkIfChampionShardIsValid(firstChampRotation.data);
         });
 
         test("getFreeRotationsFreePlayer", async () => {
@@ -32,8 +35,8 @@ describe("RiotAPI", () => {
                 await rotations.champions.getFreeRotationsFreePlayer();
             expect(allChamps).toBeInstanceOf(Array);
             const firstChampRotation = allChamps[0];
-            // checkIfChampionIsValid(firstChampRotation.data); TODO: check it
-            expect(firstChampRotation).toBeInstanceOf(Champion);
+            checkIfChampionShardIsValid(firstChampRotation.data);
+            expect(firstChampRotation).toBeInstanceOf(ChampionShard);
         });
     });
 });

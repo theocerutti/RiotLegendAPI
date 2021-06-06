@@ -1,12 +1,12 @@
-import { ChampionsTypes } from "../../ddragon/champions";
+import { ChampionTypes } from "../../ddragon/champion/championDTO";
 import { DTOEndpoint } from "../../dto";
 import { RegionName } from "../../../endpoints";
 import { SummonerTypes } from "../summoner/summonerDTO";
 
 export namespace ChampionRotationTypes {
     export type ChampionRotationAPIResponse = {
-        freeChampionIds: Array<ChampionsTypes.ChampionID>;
-        freeChampionIdsForNewPlayers: Array<ChampionsTypes.ChampionID>;
+        freeChampionIds: Array<ChampionTypes.ChampionID>;
+        freeChampionIdsForNewPlayers: Array<ChampionTypes.ChampionID>;
         maxNewPlayerLevel: SummonerTypes.SummonerLevel;
     };
 

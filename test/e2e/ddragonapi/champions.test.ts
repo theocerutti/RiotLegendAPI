@@ -1,6 +1,11 @@
-import Champion from "../../../src/dto/ddragon/class/champion";
+import {
+    checkIfChampionIsValid,
+    checkIfChampionShardIsValid,
+    isURL,
+} from "../../utils";
+import Champion from "../../../src/dto/ddragon/champion/champion";
+import ChampionShard from "../../../src/dto/ddragon/champion/championShard";
 import DDragonAPI from "../../../src/api/DDragonAPI";
-import { isURL } from "../../utils";
 
 describe("DDragonAPI", () => {
     describe("Champions", () => {
@@ -17,17 +22,13 @@ describe("DDragonAPI", () => {
         test("get all champions", async () => {
             expect(champions).toBeInstanceOf(Array);
             const firstChampion = champions[0];
-            expect(firstChampion).toBeInstanceOf(Champion);
-            expect(Object.keys(firstChampion.metadata).sort()).toEqual(
-                ["type", "format", "version"].sort()
-            );
+            expect(firstChampion).toBeInstanceOf(ChampionShard);
+            checkIfChampionShardIsValid(firstChampion.data);
         });
 
         test("get champion by name", async () => {
             expect(zyraChampion).toBeInstanceOf(Champion);
-            expect(Object.keys(zyraChampion.metadata).sort()).toEqual(
-                ["type", "format", "version"].sort()
-            );
+            checkIfChampionIsValid(zyraChampion.data);
         });
 
         test("get assets", async () => {

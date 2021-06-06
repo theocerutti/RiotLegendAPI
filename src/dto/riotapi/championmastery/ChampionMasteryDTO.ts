@@ -1,6 +1,6 @@
 import ChampionMastery from "./ChampionMastery";
 import { ChampionMasteryTypes } from "../../../types/dto/riotapi/championmastery/ChampionMasteryDTO";
-import { ChampionsTypes } from "../../../types/dto/ddragon/champions";
+import { ChampionTypes } from "../../../types/dto/ddragon/champion/championDTO";
 import DTO from "../DTO";
 import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
@@ -32,7 +32,7 @@ class ChampionMasteryDTO extends DTO implements ChampionMasteryTypes.DTO {
 
     async getByChampion(
         accountID: SummonerTypes.AccountID,
-        championID: ChampionsTypes.ChampionID,
+        championID: ChampionTypes.ChampionID,
         region?: RegionName
     ): Promise<ChampionMastery> {
         const regionReq = region || this.api.regionFallback.region;

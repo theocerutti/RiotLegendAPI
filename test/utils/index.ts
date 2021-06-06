@@ -1,7 +1,7 @@
 import { APIStatusTypes } from "../../src/types/dto/riotapi/apistatus/APIStatusDTO";
 import { ChampionMasteryTypes } from "../../src/types/dto/riotapi/championmastery/ChampionMasteryDTO";
 import { ChampionRotationTypes } from "../../src/types/dto/riotapi/championrotation/ChampionRotationDTO";
-import { ChampionsTypes } from "../../src/types/dto/ddragon/champions";
+import { ChampionTypes } from "../../src/types/dto/ddragon/champion/championDTO";
 import { MatchTypes } from "../../src/types/dto/riotapi/match/MatchDTO";
 import { SummonerTypes } from "../../src/types/dto/riotapi/summoner/summonerDTO";
 
@@ -29,7 +29,27 @@ export const checkIfAPIStatusIsValid = (
     );
 };
 
-export const checkIfChampionIsValid = (champion: ChampionsTypes.Champion) => {
+export const checkIfChampionShardIsValid = (
+    champion: ChampionTypes.ChampionShard
+) => {
+    expect(Object.keys(champion).sort()).toEqual(
+        [
+            "version",
+            "id",
+            "key",
+            "name",
+            "title",
+            "image",
+            "blurb",
+            "tags",
+            "partype",
+            "info",
+            "stats",
+        ].sort()
+    );
+};
+
+export const checkIfChampionIsValid = (champion: ChampionTypes.Champion) => {
     expect(Object.keys(champion).sort()).toEqual(
         [
             "id",

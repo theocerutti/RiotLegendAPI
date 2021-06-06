@@ -1,5 +1,5 @@
 import ChampionMastery from "../../championmastery/ChampionMastery";
-import { ChampionsTypes } from "../../../../types/dto/ddragon/champions";
+import { ChampionTypes } from "../../../../types/dto/ddragon/champion/championDTO";
 import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 import Summoner from "../Summoner";
@@ -17,7 +17,7 @@ class SummonerToChampionMasteryDTORelation extends ModelRelation<Summoner> {
     }
 
     getByChampion(
-        championID: ChampionsTypes.ChampionID
+        championID: ChampionTypes.ChampionID
     ): Promise<ChampionMastery> {
         return this.api.championMastery.getByChampion(
             this.model.data.id,

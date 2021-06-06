@@ -1,17 +1,21 @@
-import { ChampionsTypes } from "../../../types/dto/ddragon/champions";
+import ChampionBase from "./championBase";
+import { ChampionTypes } from "../../../types/dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../../../constants/constants";
+import DDragonAPI from "../../../api/DDragonAPI";
+import { Locale } from "../../../types/ddragon";
+import { VersionsTypes } from "../../../types/dto/ddragon/versions";
 
 // TODO: interpreting spell texts + add layer to get datas with ease
-class Champion {
-    private readonly metadataChampion: ChampionsTypes.APIResponseHeader;
-
-    private readonly dataChampion: ChampionsTypes.Champion;
+class Champion extends ChampionBase {
+    private readonly dataChampion: ChampionTypes.Champion;
 
     constructor(
-        championRes: ChampionsTypes.Champion,
-        championResHeader: ChampionsTypes.APIResponseHeader
+        api: DDragonAPI,
+        locale: Locale,
+        version: VersionsTypes.GameVersion,
+        championRes: ChampionTypes.Champion
     ) {
-        this.metadataChampion = championResHeader;
+        super(api, locale, version, championRes);
         this.dataChampion = championRes;
     }
 
@@ -45,7 +49,7 @@ class Champion {
     }
 
     getSquareAssetUrl(): string {
-        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/champion/${this.dataChampion.image.full}.png`;
+        return `${DDRAGON_API_URL}/cdn/${this.version}/img/champion/${this.dataChampion.image.full}.png`;
     }
 
     getPassiveAssetUrl(): string {
@@ -59,7 +63,7 @@ class Champion {
 
         if (spellIndex < 0 || spellIndex > this.dataChampion.spells.length)
             return null;
-        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/spell/${this.dataChampion.spells[spellIndex].image.full}`;
+        return `${DDRAGON_API_URL}/cdn/${this.version}/img/spell/${this.dataChampion.spells[spellIndex].image.full}`;
     }
 
     getAllAbilityAssetUrl(): Array<string> {
@@ -85,14 +89,10 @@ class Champion {
     }
 
     getSpriteSheetUrl(): string {
-        return `${DDRAGON_API_URL}/cdn/${this.metadataChampion.version}/img/sprite/${this.dataChampion.image.sprite}`;
+        return `${DDRAGON_API_URL}/cdn/${this.version}/img/sprite/${this.dataChampion.image.sprite}`;
     }
 
-    get metadata(): ChampionsTypes.APIResponseHeader {
-        return this.metadataChampion;
-    }
-
-    get data(): ChampionsTypes.Champion {
+    get data(): ChampionTypes.Champion {
         return this.dataChampion;
     }
 }

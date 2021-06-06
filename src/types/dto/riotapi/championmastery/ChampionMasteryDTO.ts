@@ -1,5 +1,5 @@
 import ChampionMasteryClass from "../../../../dto/riotapi/championmastery/ChampionMastery";
-import { ChampionsTypes } from "../../ddragon/champions";
+import { ChampionTypes } from "../../ddragon/champion/championDTO";
 import { DTOEndpoint } from "../../dto";
 import { RegionName } from "../../../endpoints";
 import { SummonerTypes } from "../summoner/summonerDTO";
@@ -21,7 +21,7 @@ export namespace ChampionMasteryTypes {
         /* Is chest granted for this champion or not in current season. */
         chestGranted: IsChestGranted;
         /* Champion ID for this entry. */
-        championId: ChampionsTypes.ChampionID;
+        championId: ChampionTypes.ChampionID;
         /* Last time this champion was played by this player - in Unix milliseconds time format. */
         lastPlayTime: UtilsTypes.UnixTimestamp;
         /* Champion level for specified player and champion combination. */
@@ -56,7 +56,7 @@ export namespace ChampionMasteryTypes {
         ): Promise<Array<ChampionMasteryClass>>;
         getByChampion(
             accountID: SummonerTypes.AccountID,
-            championID: ChampionsTypes.ChampionID,
+            championID: ChampionTypes.ChampionID,
             region?: RegionName
         ): Promise<ChampionMasteryClass>;
         getTotalScore(

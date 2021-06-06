@@ -1,5 +1,5 @@
-import Champion from "../../../ddragon/class/champion";
 import ChampionRotation from "../ChampionRotation";
+import ChampionShard from "../../../ddragon/champion/championShard";
 import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 
@@ -8,7 +8,7 @@ class ChampionRotationToChampionDTORelation extends ModelRelation<ChampionRotati
         super(api, championRotation);
     }
 
-    getFreeRotations(): Promise<Array<Champion>> {
+    getFreeRotations(): Promise<Array<ChampionShard>> {
         return Promise.all(
             this.model.data.freeChampionIds.map((champID) =>
                 this.api.dDragon.champions.getByChampionID(champID)
@@ -16,7 +16,7 @@ class ChampionRotationToChampionDTORelation extends ModelRelation<ChampionRotati
         );
     }
 
-    getFreeRotationsFreePlayer(): Promise<Array<Champion>> {
+    getFreeRotationsFreePlayer(): Promise<Array<ChampionShard>> {
         return Promise.all(
             this.model.data.freeChampionIdsForNewPlayers.map((champID) =>
                 this.api.dDragon.champions.getByChampionID(champID)
