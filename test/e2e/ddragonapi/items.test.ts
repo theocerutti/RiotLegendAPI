@@ -1,10 +1,11 @@
+import { checkIfItemIsValid, checkIfItemsIsValid } from "../../utils";
 import DDragonAPI from "../../../src/api/DDragonAPI";
-import Items from "../../../src/dto/ddragon/class/items";
+import Items from "../../../src/dto/ddragon/item/items";
 
 describe("DDragonAPI", () => {
     describe("Items", () => {
-        let api = null;
-        let items = null;
+        let api: DDragonAPI = null;
+        let items: Items = null;
 
         beforeAll(async () => {
             api = new DDragonAPI();
@@ -13,15 +14,14 @@ describe("DDragonAPI", () => {
 
         test("get all items", async () => {
             expect(items).toBeInstanceOf(Items);
-            expect(Object.keys(items.metadata).sort()).toEqual(
-                ["type", "version", "basic", "groups", "tree"].sort()
-            );
+            checkIfItemsIsValid(items.data);
         });
 
         test("get item by ID", async () => {
             const itemID = "1001";
             const item = items.getByID(itemID);
-            expect(item.name).toBe("Boots");
+            checkIfItemIsValid(item.data);
+            expect(item.data.name).toBe("Boots");
         });
 
         test("get item with bad ID", async () => {

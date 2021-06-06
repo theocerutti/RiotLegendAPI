@@ -1,6 +1,6 @@
 import DDragonAPI from "../../api/DDragonAPI";
 import { Locale } from "../../types/ddragon";
-import { VersionTypes } from "../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../types/dto/ddragon/version/versionDTO";
 
 class DDragonBaseModel<T> {
     protected readonly api: DDragonAPI;

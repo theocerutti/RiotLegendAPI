@@ -1,3 +1,4 @@
+import { ItemTypes } from "../../src/types/dto/ddragon/item/itemDTO";
 import { APIStatusTypes } from "../../src/types/dto/riotapi/apistatus/APIStatusDTO";
 import { ChampionMasteryTypes } from "../../src/types/dto/riotapi/championmastery/ChampionMasteryDTO";
 import { ChampionRotationTypes } from "../../src/types/dto/riotapi/championrotation/ChampionRotationDTO";
@@ -8,6 +9,29 @@ import { SummonerTypes } from "../../src/types/dto/riotapi/summoner/summonerDTO"
 export const DEFAULT_SUMMONER_NAME = "Priciiix";
 export const DEFAULT_REGION_NAME = "euw1";
 export const DEFAULT_PLATFORM_NAME = "europe";
+
+export const checkIfItemsIsValid = (items: ItemTypes.APIResponse) => {
+    expect(Object.keys(items).sort()).toEqual(
+        ["type", "version", "basic", "groups", "tree", "data"].sort()
+    );
+};
+
+export const checkIfItemIsValid = (item: ItemTypes.Item) => {
+    expect(Object.keys(item).sort()).toEqual(
+        [
+            "name",
+            "description",
+            "colloq",
+            "plaintext",
+            "into",
+            "image",
+            "gold",
+            "tags",
+            "maps",
+            "stats",
+        ].sort()
+    );
+};
 
 export const checkIfMatchIsValid = (match: MatchTypes.Match) => {
     expect(Object.keys(match).sort()).toEqual(["info", "metadata"].sort());

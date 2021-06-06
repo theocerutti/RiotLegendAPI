@@ -1,18 +1,18 @@
-import { ChampionTypes } from "../../../types/dto/ddragon/champion/championDTO";
 import DDragonAPI from "../../../api/DDragonAPI";
 import DDragonBaseModel from "../DDragonBaseModel";
+import { ItemTypes } from "../../../types/dto/ddragon/item/itemDTO";
 import { Locale } from "../../../types/ddragon";
 import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
-class ChampionBase extends DDragonBaseModel<ChampionTypes.ChampionBase> {
+class Item extends DDragonBaseModel<ItemTypes.Item> {
     constructor(
         api: DDragonAPI,
         locale: Locale,
         version: VersionTypes.GameVersion,
-        championBaseData: ChampionTypes.ChampionBase
+        item: ItemTypes.Item
     ) {
-        super(api, locale, version, championBaseData);
+        super(api, locale, version, item);
     }
 }
 
-export default ChampionBase;
+export default Item;

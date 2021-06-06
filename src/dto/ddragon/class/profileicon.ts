@@ -1,6 +1,6 @@
 import { DDRAGON_API_URL } from "../../../constants/constants";
 import { ProfileIconsTypes } from "../../../types/dto/ddragon/profileicons";
-import { VersionTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class ProfileIcon {
     private readonly image: ProfileIconsTypes.ProfileImage;

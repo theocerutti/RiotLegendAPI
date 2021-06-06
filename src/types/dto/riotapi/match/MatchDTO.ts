@@ -1,6 +1,7 @@
 import { ChampionTypes } from "../../ddragon/champion/championDTO";
 import { ClusterName } from "../../../endpoints";
 import { DTOEndpoint } from "../../dto";
+import { ItemTypes } from "../../ddragon/item/itemDTO";
 import MatchClass from "../../../../dto/riotapi/match/Match";
 import MatchTimeLineClass from "../../../../dto/riotapi/match/MatchTimeLine";
 import { SummonerTypes } from "../summoner/summonerDTO";
@@ -64,8 +65,8 @@ export namespace MatchTypes {
         firstTowerKill: boolean;
         gameEndedInEarlySurrender: boolean;
         gameEndedInSurrender: boolean;
-        goldEarned: number;
-        goldSpent: number;
+        goldEarned: ItemTypes.Gold;
+        goldSpent: ItemTypes.Gold;
         individualPosition: string;
         inhibitorKills: number;
         inhibitorsLost: number;
@@ -248,7 +249,7 @@ export namespace MatchTypes {
             itemId: number;
             afterId: number;
             beforeId: number;
-            goldGain: number;
+            goldGain: ItemTypes.Gold;
             participantId: ParticipantID;
             timestamp: UtilsTypes.UnixTimestamp;
             type: ItemEventType;
@@ -393,7 +394,7 @@ export namespace MatchTypes {
             powerRegen: number;
             spellVamp: number;
         };
-        currentGold: number;
+        currentGold: ItemTypes.Gold;
         damageStats: {
             magicDamageDone: number;
             magicDamageDoneToChampions: number;
@@ -408,14 +409,14 @@ export namespace MatchTypes {
             trueDamageDoneToChampions: number;
             trueDamageTaken: number;
         };
-        goldPerSecond: number;
+        goldPerSecond: ItemTypes.Gold;
         jungleMinionsKilled: number;
         level: number;
         minionsKilled: number;
         participantId: number;
         position: Position;
         timeEnemySpentControlled: number;
-        totalGold: number;
+        totalGold: ItemTypes.Gold;
         xp: number;
     };
 

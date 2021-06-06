@@ -3,7 +3,7 @@ import ChampionShardClass from "../../../../dto/ddragon/champion/championShard";
 import { DTOEndpoint } from "../../dto";
 import { Image } from "../image";
 import { Locale } from "../../../ddragon";
-import { VersionTypes } from "../versions";
+import { VersionTypes } from "../version/versionDTO";
 
 export namespace ChampionTypes {
     export type APIResponseHeader = {

@@ -1,6 +1,6 @@
 import DDragonAPI from "../../../api/DDragonAPI";
 import DTO from "../DTO";
-import { VersionTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class VersionDTO extends DTO implements VersionTypes.DTO {
     constructor(api: DDragonAPI) {

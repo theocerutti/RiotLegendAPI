@@ -2,7 +2,7 @@ import { DTOEndpoint } from "../dto";
 import { Image } from "./image";
 import { Locale } from "../../ddragon";
 import SummonerSpellsClass from "../../../dto/ddragon/class/summonerspells";
-import { VersionTypes } from "./versions";
+import { VersionTypes } from "./version/versionDTO";
 
 export namespace SummonerSpellsTypes {
     export type APIResponseHeader = {

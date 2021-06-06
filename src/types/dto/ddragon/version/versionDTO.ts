@@ -1,4 +1,4 @@
-import { DTOEndpoint } from "../dto";
+import { DTOEndpoint } from "../../dto";
 
 export namespace VersionTypes {
     export type GameVersion = string;
@@ -14,8 +14,8 @@ export namespace VersionTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         latest(): Promise<GameVersion>;
         all(): Promise<GameVersions>;
-    };
+    }
 }

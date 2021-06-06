@@ -1,10 +1,10 @@
-import { DTOEndpoint } from "../dto";
-import { Image } from "./image";
-import ItemsClass from "../../../dto/ddragon/class/items";
-import { Locale } from "../../ddragon";
-import { VersionTypes } from "./versions";
+import { DTOEndpoint } from "../../dto";
+import { Image } from "../image";
+import ItemsClass from "../../../../dto/ddragon/item/items";
+import { Locale } from "../../../ddragon";
+import { VersionTypes } from "../version/versionDTO";
 
-export namespace ItemsTypes {
+export namespace ItemTypes {
     export type APIResponseHeader = {
         type: string;
         version: VersionTypes.GameVersion;
@@ -144,11 +144,13 @@ export namespace ItemsTypes {
         };
     };
 
+    export type Gold = number;
+
     export type Prices = {
-        base: number;
+        base: Gold;
         purchasable: boolean;
-        total: number;
-        sell: number;
+        total: Gold;
+        sell: Gold;
     };
 
     export const RestEndpoint: DTOEndpoint<DTO> = {
@@ -158,10 +160,10 @@ export namespace ItemsTypes {
         },
     };
 
-    export type DTO = {
+    export interface DTO {
         all(
             version?: VersionTypes.GameVersion,
             locale?: Locale
         ): Promise<ItemsClass>;
-    };
+    }
 }

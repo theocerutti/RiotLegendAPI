@@ -1,6 +1,6 @@
 import { DDRAGON_API_URL } from "../../../constants/constants";
 import { MinimapTypes } from "../../../types/dto/ddragon/minimaps";
-import { VersionTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class Minimap {
     private readonly minimapData: MinimapTypes.Minimap;

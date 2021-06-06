@@ -1,6 +1,6 @@
 import Minimap from "./minimap";
 import { MinimapTypes } from "../../../types/dto/ddragon/minimaps";
-import { VersionTypes } from "../../../types/dto/ddragon/versions";
+import { VersionTypes } from "../../../types/dto/ddragon/version/versionDTO";
 
 class Minimaps {
     private readonly minimapsRawData: MinimapTypes.APIResponse;

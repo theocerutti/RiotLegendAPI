@@ -7,14 +7,13 @@ import {
 import CachedAPI from "./CachedAPI";
 import ChampionDTO from "../dto/ddragon/champion/championDTO";
 import { DDRAGON_API_URL } from "../constants/constants";
-import { ItemsTypes } from "../types/dto/ddragon/items";
+import ItemDTO from "../dto/ddragon/item/itemDTO";
 import { MinimapTypes } from "../types/dto/ddragon/minimaps";
 import { ProfileIconsTypes } from "../types/dto/ddragon/profileicons";
 import { RestEndpoint } from "../types/api";
 import { SummonerSpellsTypes } from "../types/dto/ddragon/sumonnerspells";
 import VersionDTO from "../dto/ddragon/version/versionDTO";
 import { compile } from "path-to-regexp";
-import { getItemsDTO } from "../dto/ddragon/items";
 import { getMinimapsDTO } from "../dto/ddragon/minimaps";
 import { getProfileIconsDTO } from "../dto/ddragon/profileicons";
 import { getSummonerSpellsDTO } from "../dto/ddragon/summonerspells";
@@ -31,6 +30,8 @@ class DDragonAPI extends CachedAPI {
 
     private readonly versionDTO: VersionDTO;
 
+    private readonly itemDTO: ItemDTO;
+
     constructor(config?: ConfigDDragonAPI) {
         super(config?.cache);
         this.apiConfig = config;
@@ -41,6 +42,7 @@ class DDragonAPI extends CachedAPI {
 
         this.championDTO = new ChampionDTO(this);
         this.versionDTO = new VersionDTO(this);
+        this.itemDTO = new ItemDTO(this);
     }
 
     get config(): ConfigDDragonAPI {
@@ -59,8 +61,8 @@ class DDragonAPI extends CachedAPI {
         return getSummonerSpellsDTO(this);
     }
 
-    get items(): ItemsTypes.DTO {
-        return getItemsDTO(this);
+    get items(): ItemDTO {
+        return this.itemDTO;
     }
 
     get profileIcons(): ProfileIconsTypes.DTO {
