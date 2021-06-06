@@ -23,13 +23,13 @@ describe("RiotAPI", () => {
             expect(masteries).toBeInstanceOf(Array);
             const firstMastery = masteries[0];
             expect(firstMastery).toBeInstanceOf(ChampionMastery);
-            expect(firstMastery.summonerId).toBe(summoner.id);
+            expect(firstMastery.data.summonerId).toBe(summoner.data.id);
         });
 
         test("championMastery getByChampion", async () => {
             const mastery = await summoner.championMastery.getByChampion("102");
             expect(mastery).toBeInstanceOf(ChampionMastery);
-            expect(mastery.summonerId).toBe(summoner.id);
+            expect(mastery.data.summonerId).toBe(summoner.data.id);
         });
 
         test("championMastery getByChampion", async () => {

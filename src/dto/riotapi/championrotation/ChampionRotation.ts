@@ -4,7 +4,7 @@ import { RegionName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import RiotBaseModel from "../RiotBaseModel";
 
-class ChampionRotation extends RiotBaseModel {
+class ChampionRotation extends RiotBaseModel<ChampionRotationTypes.ChampionRotationAPIResponse> {
     private readonly championRelation: ChampionRotationToChampionDTORelation;
 
     constructor(
@@ -12,7 +12,7 @@ class ChampionRotation extends RiotBaseModel {
         region: RegionName,
         championRotation: ChampionRotationTypes.ChampionRotationAPIResponse
     ) {
-        super(api, region, championRotation);
+        super(api, { region }, championRotation);
         this.championRelation = new ChampionRotationToChampionDTORelation(
             api,
             this

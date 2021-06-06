@@ -3,15 +3,15 @@ import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 import Summoner from "../../summoner/Summoner";
 
-class ChampionMasteryToSummonerRelation extends ModelRelation {
+class ChampionMasteryToSummonerRelation extends ModelRelation<ChampionMastery> {
     constructor(api: RiotAPI, championMastery: ChampionMastery) {
         super(api, championMastery);
     }
 
     getSummoner(): Promise<Summoner> {
         return this.api.summoner.getByID(
-            this.model.summonerId,
-            this.model.associatedRegion
+            this.model.data.summonerId,
+            this.model.region
         );
     }
 }

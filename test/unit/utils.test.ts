@@ -1,3 +1,4 @@
+import { getClusterFromRegion } from "../../src/api/utils/endpoint";
 import { isURL } from "../utils";
 
 describe("Utils Functions", () => {
@@ -20,5 +21,10 @@ describe("Utils Functions", () => {
         expect(isURL(badUrl1)).toBeFalsy();
         expect(isURL(badUrl2)).toBeFalsy();
         expect(isURL(badUrl3)).toBeFalsy();
+    });
+
+    test("getClusterFromRegion", () => {
+        expect(getClusterFromRegion("euw1")).toBe("europe");
+        expect(getClusterFromRegion("na1")).toBe("americas");
     });
 });

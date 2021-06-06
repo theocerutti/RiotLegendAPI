@@ -4,15 +4,15 @@ import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 import Summoner from "../Summoner";
 
-class SummonerToChampionMasteryDTORelation extends ModelRelation {
+class SummonerToChampionMasteryDTORelation extends ModelRelation<Summoner> {
     constructor(api: RiotAPI, summoner: Summoner) {
         super(api, summoner);
     }
 
     getAll(): Promise<Array<ChampionMastery>> {
         return this.api.championMastery.getByAccountID(
-            this.model.id,
-            this.model.associatedRegion
+            this.model.data.id,
+            this.model.region
         );
     }
 
@@ -20,16 +20,16 @@ class SummonerToChampionMasteryDTORelation extends ModelRelation {
         championID: ChampionsTypes.ChampionID
     ): Promise<ChampionMastery> {
         return this.api.championMastery.getByChampion(
-            this.model.id,
+            this.model.data.id,
             championID,
-            this.model.associatedRegion
+            this.model.region
         );
     }
 
     getTotalScore(): Promise<number> {
         return this.api.championMastery.getTotalScore(
-            this.model.id,
-            this.model.associatedRegion
+            this.model.data.id,
+            this.model.region
         );
     }
 }

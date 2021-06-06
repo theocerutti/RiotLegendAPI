@@ -18,14 +18,14 @@ describe("RiotAPI", () => {
                 DEFAULT_REGION_NAME
             );
             const masteries = await api.championMastery.getByAccountID(
-                summoner.id
+                summoner.data.id
             );
             mastery = masteries[0];
         });
 
         test("summoner getAll", async () => {
             const summ = await mastery.summoner.getSummoner();
-            expect(summ.id).toBe(mastery.summonerId);
+            expect(summ.data.id).toBe(mastery.data.summonerId);
         });
     });
 });

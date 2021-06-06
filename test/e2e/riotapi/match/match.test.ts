@@ -23,7 +23,7 @@ describe("RiotAPI", () => {
 
         test("getMatchListIdsByPUUID", async () => {
             const matchIds = await api.match.getMatchListIdsByPUUID(
-                summoner.puuid,
+                summoner.data.puuid,
                 DEFAULT_PLATFORM_NAME
             );
             expect(matchIds).toBeInstanceOf(Array);
@@ -32,7 +32,7 @@ describe("RiotAPI", () => {
 
         test("getMatchListByPUUID", async () => {
             const matches = await api.match.getMatchListByPUUID(
-                summoner.puuid,
+                summoner.data.puuid,
                 DEFAULT_PLATFORM_NAME
             );
             expect(matches).toBeInstanceOf(Array);
@@ -43,7 +43,7 @@ describe("RiotAPI", () => {
 
         test("getMatchByID", async () => {
             const matchIds = await api.match.getMatchListIdsByPUUID(
-                summoner.puuid,
+                summoner.data.puuid,
                 DEFAULT_PLATFORM_NAME
             );
             const match = await api.match.getMatchByID(
@@ -56,7 +56,7 @@ describe("RiotAPI", () => {
 
         test("getMatchTimeLineByID", async () => {
             const matchIds = await api.match.getMatchListIdsByPUUID(
-                summoner.puuid,
+                summoner.data.puuid,
                 DEFAULT_PLATFORM_NAME
             );
             const matchTimeLine = await api.match.getMatchTimeLineByID(

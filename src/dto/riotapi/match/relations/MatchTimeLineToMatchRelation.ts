@@ -3,7 +3,7 @@ import MatchTimeLine from "../MatchTimeLine";
 import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 
-class MatchTimeLineToMatchRelation extends ModelRelation {
+class MatchTimeLineToMatchRelation extends ModelRelation<MatchTimeLine> {
     constructor(api: RiotAPI, matchTimeLine: MatchTimeLine) {
         super(api, matchTimeLine);
     }

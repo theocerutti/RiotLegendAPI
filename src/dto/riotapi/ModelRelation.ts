@@ -1,11 +1,11 @@
 import RiotAPI from "../../api/RiotAPI";
 
-class ModelRelation {
+class ModelRelation<T> {
     private readonly riotApi: RiotAPI;
 
-    private readonly modelInstance: any;
+    private readonly modelInstance: T;
 
-    constructor(api: RiotAPI, model: any) {
+    constructor(api: RiotAPI, model: T) {
         this.riotApi = api;
         this.modelInstance = model;
     }
@@ -14,7 +14,7 @@ class ModelRelation {
         return this.riotApi;
     }
 
-    get model(): any {
+    get model(): T {
         return this.modelInstance;
     }
 }

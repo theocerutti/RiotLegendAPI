@@ -1,8 +1,8 @@
+import { ClusterName } from "../../../types/endpoints";
 import DTO from "../DTO";
 import Match from "./Match";
 import MatchTimeLine from "./MatchTimeLine";
 import { MatchTypes } from "../../../types/dto/riotapi/match/MatchDTO";
-import { PlatformName } from "../../../types/endpoints";
 import RiotAPI from "../../../api/RiotAPI";
 import { SummonerTypes } from "../../../types/dto/riotapi/summoner/summonerDTO";
 
@@ -13,11 +13,11 @@ class MatchDTO extends DTO implements MatchTypes.DTO {
 
     async getMatchListIdsByPUUID(
         puuid: SummonerTypes.PUUID,
-        platform?: PlatformName
+        cluster?: ClusterName
     ): Promise<Array<MatchTypes.MatchID>> {
-        const reqPlatform = platform || this.api.regionFallback.cluster;
+        const reqCluster = cluster || this.api.regionFallback.cluster;
         return this.api.riotRequest(
-            reqPlatform,
+            reqCluster,
             MatchTypes.RestEndpoint.getMatchListIdsByPUUID,
             { puuid }
         );
@@ -25,39 +25,39 @@ class MatchDTO extends DTO implements MatchTypes.DTO {
 
     async getMatchListByPUUID(
         puuid: SummonerTypes.PUUID,
-        platform?: PlatformName
+        cluster?: ClusterName
     ): Promise<Array<Match>> {
-        const matchIds = await this.getMatchListIdsByPUUID(puuid, platform);
+        const matchIds = await this.getMatchListIdsByPUUID(puuid, cluster);
         return Promise.all(
-            matchIds.map((matchId) => this.getMatchByID(matchId, platform))
+            matchIds.map((matchId) => this.getMatchByID(matchId, cluster))
         );
     }
 
     async getMatchByID(
         matchId: MatchTypes.MatchID,
-        platform?: PlatformName
+        cluster?: ClusterName
     ): Promise<Match> {
-        const reqPlatform = platform || this.api.regionFallback.cluster;
+        const reqCluster = cluster || this.api.regionFallback.cluster;
         const match: MatchTypes.Match = await this.api.riotRequest(
-            reqPlatform,
+            reqCluster,
             MatchTypes.RestEndpoint.getMatchByID,
             { matchId }
         );
-        return new Match(this.api, platform, match);
+        return new Match(this.api, reqCluster, match);
     }
 
     async getMatchTimeLineByID(
         matchId: MatchTypes.MatchID,
-        platform?: PlatformName
+        cluster?: ClusterName
     ): Promise<MatchTimeLine> {
-        const reqPlatform = platform || this.api.regionFallback.cluster;
+        const reqCluster = cluster || this.api.regionFallback.cluster;
         const matchTimeLine: MatchTypes.MatchTimeLine =
             await this.api.riotRequest(
-                reqPlatform,
+                reqCluster,
                 MatchTypes.RestEndpoint.getMatchTimeLineByID,
                 { matchId }
             );
-        return new MatchTimeLine(this.api, platform, matchTimeLine);
+        return new MatchTimeLine(this.api, reqCluster, matchTimeLine);
     }
 }
 

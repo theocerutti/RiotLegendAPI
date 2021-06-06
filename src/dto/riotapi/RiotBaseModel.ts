@@ -1,19 +1,36 @@
+import { ClusterName, RegionName } from "../../types/endpoints";
 import RiotAPI from "../../api/RiotAPI";
+import { getClusterFromRegion } from "../../api/utils/endpoint";
 
-class RiotBaseModel {
+class RiotBaseModel<T> {
     protected readonly api: RiotAPI;
 
-    protected readonly associatedRegion: string;
+    private readonly associatedRegion?: RegionName;
 
-    private readonly apiData: any;
+    private readonly associatedCluster?: ClusterName;
 
-    constructor(api: RiotAPI, region: string, data: any) {
+    private readonly apiData: T;
+
+    constructor(
+        api: RiotAPI,
+        platform: { region?: RegionName; cluster?: ClusterName },
+        data: T
+    ) {
         this.apiData = data;
-        this.associatedRegion = region;
         this.api = api;
+        this.associatedCluster = platform.cluster;
+        this.associatedRegion = platform.region;
+        if (this.associatedRegion && !this.associatedCluster)
+            this.associatedCluster = getClusterFromRegion(
+                this.associatedRegion
+            );
     }
 
-    public get data() {
+    public get region(): RegionName {
+        return this.associatedRegion;
+    }
+
+    public get data(): T {
         return this.apiData;
     }
 }

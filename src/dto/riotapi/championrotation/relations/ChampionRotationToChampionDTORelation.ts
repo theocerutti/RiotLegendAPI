@@ -3,7 +3,7 @@ import ChampionRotation from "../ChampionRotation";
 import ModelRelation from "../../ModelRelation";
 import RiotAPI from "../../../../api/RiotAPI";
 
-class ChampionRotationToChampionDTORelation extends ModelRelation {
+class ChampionRotationToChampionDTORelation extends ModelRelation<ChampionRotation> {
     constructor(api: RiotAPI, championRotation: ChampionRotation) {
         super(api, championRotation);
     }

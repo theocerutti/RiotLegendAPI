@@ -20,7 +20,7 @@ describe("RiotAPI", () => {
             api = new RiotAPI({ riotToken: riotAPIKey });
             summoner = await api.summoner.getByName(DEFAULT_SUMMONER_NAME);
             const matchIds = await api.match.getMatchListIdsByPUUID(
-                summoner.puuid,
+                summoner.data.puuid,
                 DEFAULT_PLATFORM_NAME
             );
             matchTimeLine = await api.match.getMatchTimeLineByID(

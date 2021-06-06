@@ -2,7 +2,7 @@ import { ChampionsTypes } from "../../ddragon/champions";
 import { DTOEndpoint } from "../../dto";
 import MatchClass from "../../../../dto/riotapi/match/Match";
 import MatchTimeLineClass from "../../../../dto/riotapi/match/MatchTimeLine";
-import { PlatformName } from "../../../endpoints";
+import { ClusterName } from "../../../endpoints";
 import { SummonerTypes } from "../summoner/summonerDTO";
 import { UtilsTypes } from "../../../utils";
 
@@ -441,19 +441,19 @@ export namespace MatchTypes {
     export interface DTO {
         getMatchListIdsByPUUID(
             puuid: SummonerTypes.PUUID,
-            platform?: PlatformName
+            cluster?: ClusterName
         ): Promise<Array<MatchID>>;
         getMatchListByPUUID(
             puuid: SummonerTypes.PUUID,
-            platform?: PlatformName
+            cluster?: ClusterName
         ): Promise<Array<MatchClass>>;
         getMatchByID(
             match: MatchID,
-            platform?: PlatformName
+            cluster?: ClusterName
         ): Promise<MatchClass>;
         getMatchTimeLineByID(
             match: MatchID,
-            platform?: PlatformName
+            cluster?: ClusterName
         ): Promise<MatchTimeLineClass>;
     }
 }
