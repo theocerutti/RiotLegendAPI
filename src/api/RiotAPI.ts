@@ -6,6 +6,7 @@ import {
 } from "../types/endpoints";
 import { InvalidRiotApiConfig, NoCredentialsError } from "../errors";
 import { RequestOptions, RestEndpoint } from "../types/api";
+import { getClusterFromRegion, getRiotAPIBaseURL } from "./utils/endpoint";
 import APIStatusDTO from "../dto/riotapi/apistatus/APIStatusDTO";
 import CachedAPI from "./CachedAPI";
 import ChampionMasteryDTO from "../dto/riotapi/championmastery/ChampionMasteryDTO";
@@ -16,7 +17,6 @@ import { RIOT_TOKEN_HEADER } from "../constants/constants";
 import { RiotAPIConfig } from "../types/riotapi";
 import SummonerDTO from "../dto/riotapi/summoner/SummonerDTO";
 import { compile } from "path-to-regexp";
-import { getRiotAPIBaseURL } from "./utils/endpoint";
 
 export const DEFAULT_REGION_FALLBACK: RegionName = "euw1";
 export const DEFAULT_CLUSTER_FALLBACK: ClusterName = "europe";
@@ -42,6 +42,11 @@ class RiotAPI extends CachedAPI {
         if (!config) throw new InvalidRiotApiConfig();
         if (!config.riotToken) throw new NoCredentialsError();
         super(config.cache);
+        if (!config.platform?.cluster && config.platform?.region) {
+            this.config.platform.cluster = getClusterFromRegion(
+                config.platform.region
+            );
+        }
         this.defaultRegionFallback = {
             region: DEFAULT_REGION_FALLBACK,
             cluster: DEFAULT_CLUSTER_FALLBACK,

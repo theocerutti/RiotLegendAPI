@@ -4,7 +4,7 @@ import { BOTTLENECK_LIMITER_DEFAULT_OPTIONS } from "../constants/constants";
 import Bottleneck from "bottleneck";
 import { CacheConfig } from "../types/cachedapi";
 import Redis from "ioredis";
-import fetch from "node-fetch";
+import axios from "axios";
 
 class CachedAPI {
     protected readonly cache?: MemoryCache | RedisCache;
@@ -68,15 +68,15 @@ class CachedAPI {
         if (cacheValue) return cacheValue as T;
 
         const res = await this.requestLimiter.schedule(async () =>
-            fetch(url, {
+            axios.request({
+                url,
                 method,
-                body: options?.body ? JSON.stringify(options.body) : undefined,
+                data: options?.body,
                 headers: options?.headers,
             })
         );
-        const resData = res.json();
-        await this.setCache(method, url, resData);
-        return resData;
+        await this.setCache(method, url, res);
+        return res.data;
     }
 }
 
